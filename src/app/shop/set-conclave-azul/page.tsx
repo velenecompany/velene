@@ -57,7 +57,7 @@ export default function ProductoAzul() {
                 <span className="text-[9px] tracking-[0.15em] uppercase bg-black text-white px-2 py-1">Oferta</span>
               </div>
               <p className="text-[11px] text-emerald-600 tracking-wide mb-8">✓ Envío gratis</p>
-              <p className="text-sm text-stone-500 leading-relaxed mb-8">Set completo de playera crop y shorts a juego. Tejido premium, corte oversized en playera y shorts de tiro alto. Bordado Vela en pecho y shorts.</p>
+              <p className="text-sm text-stone-500 leading-relaxed mb-8">Diseño posterior desarrollado mediante serigrafía de alta calidad, garantizando definición, resistencia y presencia visual duradera. Logotipo frontal elaborado con bordado premium, aportando textura, identidad y acabado superior.</p>
               <p className="text-[10px] tracking-[0.15em] uppercase text-stone-500 mb-3">Talla</p>
               <div className="flex gap-2 mb-8">
                 {['S', 'M', 'L'].map(t => (
