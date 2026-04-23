@@ -117,3 +117,20 @@ export default function Footer() {
                 </div>
                 <div>
                   <p className="text-[11px] text-stone-400">¿Habrá
+                  restock?</p>
+                  <p className="text-[11px] text-stone-600">No garantizamos restock una vez finalizado un drop.</p>
+                </div>
+              </div>
+            </details>
+          </div>
+
+        </div>
+
+        <div className="border-t border-stone-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-[11px] text-stone-600 tracking-wider">© 2026 VELENÉ. Todos los derechos reservados.</p>
+          <p className="text-[11px] text-stone-600 tracking-wider">Guadalajara, México</p>
+        </div>
+      </div>
+    </footer>
+  );
+}
