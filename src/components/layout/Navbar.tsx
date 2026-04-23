@@ -24,16 +24,11 @@ export default function Navbar() {
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-[#FAFAF8]/95 backdrop-blur-sm border-b border-[#E2DDD8]' : 'bg-transparent'}`}>
       <nav className="max-w-screen-xl mx-auto px-6 h-16 flex items-center justify-between">
         <div className="hidden md:flex items-center gap-8">
-          <Link href="/shop" className="text-[11px] tracking-[0.15em] uppercase text-stone-500 hover:text-stone-900 transition-colors">Shop</Link>
           <Link href="/drops" className="text-[11px] tracking-[0.15em] uppercase text-stone-500 hover:text-stone-900 transition-colors">Drops</Link>
         </div>
         <Link href="/" className="font-display text-2xl font-light tracking-[0.2em] uppercase absolute left-1/2 -translate-x-1/2">Vélene</Link>
         <div className="hidden md:flex items-center gap-6">
           <Link href="/about" className="text-[11px] tracking-[0.15em] uppercase text-stone-500 hover:text-stone-900 transition-colors">About</Link>
-          <Link href="/account" className="text-[11px] tracking-[0.15em] uppercase text-stone-500 hover:text-stone-900 transition-colors">Account</Link>
-          <Link href="/cart" className="text-[11px] tracking-[0.15em] uppercase text-stone-900 border-b border-stone-900 pb-px">
-            Cart ({count})
-          </Link>
         </div>
         <button className="md:hidden ml-auto" onClick={() => setMenuOpen(!menuOpen)}>
           <div className={`w-5 h-px bg-stone-900 transition-all mb-1.5 ${menuOpen ? 'rotate-45 translate-y-2' : ''}`} />
@@ -43,11 +38,11 @@ export default function Navbar() {
       </nav>
       {menuOpen && (
         <div className="md:hidden bg-[#FAFAF8] border-t border-[#E2DDD8] px-6 py-8">
-          {['Shop', 'Drops', 'About', 'Account', 'Cart'].map(item => (
+          {['Drops', 'About'].map(item => (
             <Link key={item} href={`/${item.toLowerCase()}`}
               className="block text-sm tracking-[0.15em] uppercase py-3 border-b border-[#E2DDD8] last:border-0"
               onClick={() => setMenuOpen(false)}>
-              {item}{item === 'Cart' && count > 0 ? ` (${count})` : ''}
+              {item}
             </Link>
           ))}
         </div>
