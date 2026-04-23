@@ -65,22 +65,3 @@ body {
   transform: scale(1.05);
 }
 
-/* Cursor dot premium */
-  width: 6px;
-  height: 6px;
-  background: #0A0A0A;
-  border-radius: 50%;
-  position: fixed;
-  pointer-events: none;
-  z-index: 9999;
-  transition: transform 0.15s ease;
-}
-  width: 32px;
-  height: 32px;
-  border: 1px solid #0A0A0A;
-  border-radius: 50%;
-  position: fixed;
-  pointer-events: none;
-  z-index: 9998;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), width 0.3s ease, height 0.3s ease;
-}
