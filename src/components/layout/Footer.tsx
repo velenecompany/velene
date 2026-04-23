@@ -66,12 +66,12 @@ export default function Footer() {
             </form>
             {/* Social */}
             <div className="flex gap-5 mt-8">
-              <a href="https://instagram.com/velenecompany" target="_blank" rel="noopener noreferrer" className="text-stone-500 hover:text-white transition-colors">
+              <a href="https://www.instagram.com/vela_cmnty/" target="_blank" rel="noopener noreferrer" className="text-stone-500 hover:text-white transition-colors">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                   <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/>
                 </svg>
               </a>
-              <a href="https://tiktok.com/@velenecompany" target="_blank" rel="noopener noreferrer" className="text-stone-500 hover:text-white transition-colors">
+              <a href="https://www.tiktok.com/@vela_ofi" target="_blank" rel="noopener noreferrer" className="text-stone-500 hover:text-white transition-colors">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.16 8.16 0 0 0 4.77 1.52V6.75a4.85 4.85 0 0 1-1-.06z"/>
                 </svg>
@@ -97,8 +97,32 @@ export default function Footer() {
           {/* Support */}
           <div>
             <p className="text-[10px] tracking-[0.2em] uppercase text-stone-600 mb-4">Support</p>
-            <Link href="#size-guide" className="block text-sm text-stone-400 hover:text-white transition-colors py-1">Size Guide</Link>
-            <details className="py-1">
+<details className="py-1">
+  <summary className="text-sm text-stone-400 hover:text-white transition-colors cursor-pointer list-none">Size Guide</summary>
+  <div className="mt-3 overflow-x-auto">
+    <table className="w-full text-[11px]">
+      <thead>
+        <tr className="border-b border-stone-800">
+          <th className="text-left text-[9px] tracking-[0.15em] uppercase text-stone-600 pb-2 pr-4">Size</th>
+          <th className="text-left text-[9px] tracking-[0.15em] uppercase text-stone-600 pb-2 pr-4">Length</th>
+          <th className="text-left text-[9px] tracking-[0.15em] uppercase text-stone-600 pb-2 pr-4">Width</th>
+          <th className="text-left text-[9px] tracking-[0.15em] uppercase text-stone-600 pb-2">Sleeve</th>
+        </tr>
+      </thead>
+      <tbody>
+        {[['S','52','52','14'],['M','57','55','17'],['L','60','58','20']].map(([s,l,w,sl]) => (
+          <tr key={s} className="border-b border-stone-900">
+            <td className="text-stone-300 py-2 pr-4 font-medium">{s}</td>
+            <td className="text-stone-500 py-2 pr-4">{l}</td>
+            <td className="text-stone-500 py-2 pr-4">{w}</td>
+            <td className="text-stone-500 py-2">{sl}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    <p className="text-[9px] text-stone-700 mt-2">Medidas en centímetros</p>
+  </div>
+</details>            <details className="py-1">
               <summary className="text-sm text-stone-400 hover:text-white transition-colors cursor-pointer list-none">Returns</summary>
               <p className="text-[11px] text-stone-600 leading-relaxed mt-2 pr-2">
                 Debido a que trabajamos mediante drops limitados, actualmente no aceptamos devoluciones por cambio de opinión. Si existe algún defecto de fabricación o error en el pedido, contáctanos dentro de las primeras 48 horas.
