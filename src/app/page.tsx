@@ -1,0 +1,86 @@
+import Navbar from '@/components/layout/Navbar';
+import Footer from '@/components/layout/Footer';
+import HeroParallax from '@/components/home/HeroParallax';
+import Link from 'next/link';
+
+export default function HomePage() {
+  return (
+    <>
+      <Navbar />
+      <main>
+        <section className="relative flex items-end overflow-hidden" style={{minHeight:"100vh"}}>
+          <HeroParallax />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/75" />
+          <div className="relative z-10 w-full max-w-screen-xl mx-auto px-6 pb-24">
+            <p className="text-[11px] tracking-[0.3em] uppercase text-white/60 mb-4">The Conclave · Drop 001</p>
+            <h1 className="font-display text-[clamp(64px,10vw,130px)] font-light text-white leading-none mb-8">
+              Luxury in<br />Defiance.
+            </h1>
+            <div className="flex gap-4">
+              <Link href="/shop" className="px-8 py-4 bg-white text-black text-xs tracking-[0.2em] uppercase hover:bg-stone-200 transition-colors">Shop ahora</Link>
+              <Link href="/drops" className="px-8 py-4 border border-white text-white text-xs tracking-[0.2em] uppercase hover:bg-white/10 transition-colors">Ver colección</Link>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-20 bg-[#F5F2ED]">
+          <div className="max-w-screen-xl mx-auto px-6">
+            <div className="flex justify-between items-baseline mb-12">
+              <div>
+                <p className="text-[10px] tracking-[0.25em] uppercase text-stone-400 mb-2">Drop 001</p>
+                <p className="font-display text-4xl font-light">The Conclave</p>
+              </div>
+              <Link href="/shop" className="text-[11px] tracking-[0.15em] uppercase text-stone-500 border-b border-stone-300 pb-px">Ver todo</Link>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-stone-200">
+              {[
+                { img: '/IMG_9375.jpg', name: 'Set Conclave Rosa', price: 899, tag: 'Nuevo', slug: 'set-conclave-rosa' },
+                { img: '/IMG_9367.jpg', name: 'Set Conclave Beige', price: 899, tag: 'Nuevo', slug: 'set-conclave-beige' },
+                { img: '/IMG_9368.jpg', name: 'Set Conclave Azul', price: 899, comparePrice: 549, tag: 'Oferta', slug: 'set-conclave-azul' },
+              ].map((p, i) => (
+                <Link key={i} href={`/shop/${p.slug}`} className="group bg-white block relative">
+                  <div className="aspect-[3/4] overflow-hidden relative">
+                    {p.tag && <span className="absolute top-3 left-3 z-10 bg-black text-white text-[9px] tracking-[0.15em] uppercase px-2.5 py-1">{p.tag}</span>}
+                    <img src={p.img} alt={p.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                  </div>
+                  <div className="p-4">
+                    <p className="text-sm mb-2">{p.name}</p>
+                    <div className="flex items-center gap-2">
+                      <p className="font-display text-lg">${p.price.toLocaleString('es-MX')}</p>
+                      {p.comparePrice && <p className="text-sm text-stone-400 line-through">${p.comparePrice.toLocaleString('es-MX')}</p>}
+                    </div>
+                    <p className="text-[10px] text-emerald-600 mt-1">✓ Envío gratis</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="py-28 max-w-screen-xl mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <div>
+              <p className="text-[10px] tracking-[0.25em] uppercase text-stone-400 mb-6">Filosofía</p>
+              <h2 className="font-display text-5xl md:text-6xl font-light leading-tight mb-8">Diseñado para<br />quienes no paran.</h2>
+              <p className="text-sm text-stone-500 leading-relaxed max-w-md">Vélene nace de la disciplina. Cada pieza construida para quien entiende que el movimiento no es opcional — es un estado mental.</p>
+              <Link href="/about" className="inline-block mt-8 text-[11px] tracking-[0.2em] uppercase border-b border-stone-900 pb-px">Conoce Vélene</Link>
+            </div>
+            <div className="aspect-[3/4] overflow-hidden">
+              <img src="/IMG_9364.jpg" alt="Luxury in Defiance" className="w-full h-full object-cover" />
+            </div>
+          </div>
+        </section>
+
+        <section className="py-24 bg-[#0A0A0A] text-white">
+          <div className="max-w-screen-xl mx-auto px-6 text-center">
+            <p className="text-[10px] tracking-[0.3em] uppercase text-white/40 mb-6">The Conclave · Drop 001</p>
+            <h2 className="font-display text-5xl md:text-7xl font-light mb-8">Luxury in Defiance.</h2>
+            <p className="text-sm text-white/50 mb-10 max-w-md mx-auto">Colección limitada. Envío gratis en todos los pedidos.</p>
+            <Link href="/shop" className="inline-block px-10 py-4 border border-white text-xs tracking-[0.2em] uppercase hover:bg-white hover:text-black transition-colors">Shop The Conclave</Link>
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </>
+  );
+}
