@@ -3,14 +3,14 @@ import Footer from '@/components/layout/Footer';
 import Link from 'next/link';
 
 const PRODUCTS = [
-  { id: '1', slug: 'shorts-velene-pro', name: 'Shorts Vélene Pro', category: 'Sport', gender: 'unisex', price: 890, tag: 'Nuevo', isLimited: false },
+  { id: '1', slug: 'shorts-velene-pro', name: 'Shorts VELENÉ Pro', category: 'Sport', gender: 'unisex', price: 890, tag: 'Nuevo', isLimited: false },
   { id: '2', slug: 'top-compresion', name: 'Top Compresión', category: 'Sport', gender: 'women', price: 750, tag: null, isLimited: false },
   { id: '3', slug: 'jogger-essential', name: 'Jogger Essential', category: 'Sport', gender: 'unisex', price: 1200, tag: 'Bestseller', isLimited: false },
   { id: '4', slug: 'camiseta-dry-fit', name: 'Camiseta Dry-Fit', category: 'Sport', gender: 'unisex', price: 650, tag: null, isLimited: false },
-  { id: '5', slug: 'bra-sport', name: 'Bra Sport Vélene', category: 'Sport', gender: 'women', price: 820, tag: 'Nuevo', isLimited: true },
+  { id: '5', slug: 'bra-sport', name: 'Bra Sport VELENÉ', category: 'Sport', gender: 'women', price: 820, tag: 'Nuevo', isLimited: true },
   { id: '6', slug: 'legging-pro', name: 'Legging Pro', category: 'Sport', gender: 'women', price: 1350, tag: 'Bestseller', isLimited: false },
   { id: '7', slug: 'hoodie-performance', name: 'Hoodie Performance', category: 'Sport', gender: 'unisex', price: 1850, tag: null, isLimited: true },
-  { id: '8', slug: 'tank-velene', name: 'Tank Vélene', category: 'Sport', gender: 'unisex', price: 580, tag: null, isLimited: false },
+  { id: '8', slug: 'tank-velene', name: 'Tank VELENÉ', category: 'Sport', gender: 'unisex', price: 580, tag: null, isLimited: false },
 ];
 
 export default function ShopPage() {

@@ -62,8 +62,8 @@ export default function HomePage() {
             <div>
               <p className="text-[10px] tracking-[0.25em] uppercase text-stone-400 mb-6">Filosofía</p>
               <h2 className="font-display text-5xl md:text-6xl font-light leading-tight mb-8">Diseñado para<br />quienes no paran.</h2>
-              <p className="text-sm text-stone-500 leading-relaxed max-w-md">Vélene nace de la disciplina. Cada pieza construida para quien entiende que el movimiento no es opcional — es un estado mental.</p>
-              <Link href="/about" className="inline-block mt-8 text-[11px] tracking-[0.2em] uppercase border-b border-stone-900 pb-px">Conoce Vélene</Link>
+              <p className="text-sm text-stone-500 leading-relaxed max-w-md">VELENÉ nace de la disciplina. Cada pieza construida para quien entiende que el movimiento no es opcional — es un estado mental.</p>
+              <Link href="/about" className="inline-block mt-8 text-[11px] tracking-[0.2em] uppercase border-b border-stone-900 pb-px">Conoce VELENÉ</Link>
             </div>
             <div className="aspect-[3/4] overflow-hidden">
               <img src="/IMG_9364.jpg" alt="Luxury in Defiance" className="w-full h-full object-cover" />

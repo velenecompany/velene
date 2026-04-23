@@ -5,7 +5,7 @@ import AddToCartButton from '@/components/shop/AddToCartButton';
 // In production: fetch from DB using slug
 export default function ProductPage({ params }: { params: { slug: string } }) {
   const product = {
-    id: '1', slug: params.slug, name: 'Shorts Vélene Pro',
+    id: '1', slug: params.slug, name: 'Shorts VELENÉ Pro',
     description: 'Shorts de alto rendimiento con tejido técnico de 4 vías. Bolsillo trasero con cierre, cintura elástica ajustable. Perfecto para entrenamiento de alta intensidad o uso casual.',
     category: 'Sport', gender: 'Unisex', price: 890,
     details: ['Tejido: 87% Polyester, 13% Elastane', 'Secado rápido', 'Bolsillo trasero con cierre', 'Cintura elástica de 5cm', 'Lavado a máquina 30°C'],

@@ -17,7 +17,7 @@ export default function Footer() {
       <div className="max-w-screen-xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           <div className="md:col-span-2">
-            <p className="font-display text-3xl font-light tracking-[0.2em] uppercase mb-4">Vélene</p>
+            <p className="font-display text-3xl font-light tracking-[0.2em] uppercase mb-4">VELENÉ</p>
             <p className="text-sm text-stone-400 leading-relaxed max-w-xs">Performance built for discipline. Wear made for those who don't stop.</p>
             <form onSubmit={subscribe} className="mt-6 flex gap-2">
               {submitted ? (

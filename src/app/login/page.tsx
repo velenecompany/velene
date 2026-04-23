@@ -35,7 +35,7 @@ export default function LoginPage() {
       <Navbar />
       <main className="pt-16 min-h-screen flex items-center justify-center px-6 bg-[#F5F2ED]">
         <div className="w-full max-w-sm">
-          <p className="font-display text-4xl font-light text-center mb-2">Vélene</p>
+          <p className="font-display text-4xl font-light text-center mb-2">VELENÉ</p>
           <p className="text-[10px] tracking-[0.25em] uppercase text-stone-400 text-center mb-10">
             {mode === 'login' ? 'Iniciar sesión' : 'Crear cuenta'}
           </p>

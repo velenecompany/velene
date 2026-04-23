@@ -26,7 +26,7 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-8">
           <Link href="/drops" className="text-[11px] tracking-[0.15em] uppercase text-stone-500 hover:text-stone-900 transition-colors">Drops</Link>
         </div>
-        <Link href="/" className="font-display text-2xl font-light tracking-[0.2em] uppercase absolute left-1/2 -translate-x-1/2">Vélene</Link>
+        <Link href="/" className="font-display text-2xl font-light tracking-[0.2em] uppercase absolute left-1/2 -translate-x-1/2">VELENÉ</Link>
         <div className="hidden md:flex items-center gap-6">
           <Link href="/about" className="text-[11px] tracking-[0.15em] uppercase text-stone-500 hover:text-stone-900 transition-colors">About</Link>
         </div>

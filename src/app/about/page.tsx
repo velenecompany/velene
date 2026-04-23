@@ -21,7 +21,7 @@ export default function AboutPage() {
         <section className="max-w-screen-xl mx-auto px-6 py-24">
           <div className="grid md:grid-cols-2 gap-20 items-start">
             <div>
-              <p className="text-[10px] tracking-[0.25em] uppercase text-stone-400 mb-6">¿Qué es VELENE?</p>
+              <p className="text-[10px] tracking-[0.25em] uppercase text-stone-400 mb-6">¿Qué es VELENÉ?</p>
               <p className="font-display text-4xl font-light leading-snug mb-10">
                 Moda deportiva creada para quienes entienden que el movimiento es una extensión de su identidad.
               </p>
@@ -29,7 +29,7 @@ export default function AboutPage() {
                 La marca nace en Guadalajara, México, fundada por dos jóvenes emprendedores impulsados por la disciplina, el propósito y la convicción de construir algo propio.
               </p>
               <p className="text-sm text-stone-500 leading-relaxed mb-6">
-                Inspirada en el concepto athleisure, VELENE fusiona estética contemporánea con funcionalidad diaria. Diseñamos prendas pensadas para acompañar cada momento: entrenar, crear, trabajar y vivir sin cambiar quién eres.
+                Inspirada en el concepto athleisure, VELENÉ fusiona estética contemporánea con funcionalidad diaria. Diseñamos prendas pensadas para acompañar cada momento: entrenar, crear, trabajar y vivir sin cambiar quién eres.
               </p>
               <p className="text-sm text-stone-500 leading-relaxed mb-6">
                 Nuestra visión evoluciona constantemente. Hoy comenzamos con moda deportiva y, en el futuro, integraremos líneas técnicas de rendimiento como leggings, conjuntos deportivos y piezas diseñadas para el movimiento activo.
