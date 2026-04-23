@@ -18,34 +18,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="es">
       <body>
         {children}
-        <div className="cursor-dot" id="cursor-dot" />
-        <div className="cursor-ring" id="cursor-ring" />
-        <script dangerouslySetInnerHTML={{ __html: `
-          // Scroll reveal
-          const observer = new IntersectionObserver((entries) => {
-            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-          }, { threshold: 0.1 });
-          document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-          // Cursor
-          const dot = document.getElementById('cursor-dot');
-          const ring = document.getElementById('cursor-ring');
-          let mx = 0, my = 0, rx = 0, ry = 0;
-          document.addEventListener('mousemove', e => {
-            mx = e.clientX; my = e.clientY;
-            dot.style.left = mx - 3 + 'px';
-            dot.style.top = my - 3 + 'px';
-          });
-          function animateRing() {
-            rx += (mx - rx) * 0.12;
-            ry += (my - ry) * 0.12;
-            ring.style.left = rx - 16 + 'px';
-            ring.style.top = ry - 16 + 'px';
-            requestAnimationFrame(animateRing);
-          }
-          animateRing();
-        `}} />
       </body>
     </html>
   );
 }
+sed -i '' '/cursor-dot/,/cursor-ring/d' /Users/alainherrera/Desktop/vela/public-site/src/app/globals.css
+sed -i '' 's/\* { cursor: none !important; }//' /Users/alainherrera/Desktop/vela/public-site/src/app/globals.css
