@@ -66,8 +66,6 @@ body {
 }
 
 /* Cursor dot premium */
-* { cursor: none !important; }
-.cursor-dot {
   width: 6px;
   height: 6px;
   background: #0A0A0A;
@@ -77,7 +75,6 @@ body {
   z-index: 9999;
   transition: transform 0.15s ease;
 }
-.cursor-ring {
   width: 32px;
   height: 32px;
   border: 1px solid #0A0A0A;
