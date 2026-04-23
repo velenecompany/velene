@@ -75,8 +75,8 @@ export default function HomePage() {
           <div className="max-w-screen-xl mx-auto px-6 text-center">
             <p className="text-[10px] tracking-[0.3em] uppercase text-white/40 mb-6">The Conclave · Drop 001</p>
             <h2 className="font-display text-5xl md:text-7xl font-light mb-8">Luxury in Defiance.</h2>
-            <p className="text-sm text-white/50 mb-10 max-w-md mx-auto">Colección limitada. Envío gratis en todos los pedidos.</p>
-            <Link href="/shop" className="inline-block px-10 py-4 border border-white text-xs tracking-[0.2em] uppercase hover:bg-white hover:text-black transition-colors">Shop The Conclave</Link>
+            <p className="text-sm text-white/50 mb-10 max-w-md mx-auto">Edición limitada. Tres colorways. Una sola oportunidad.</p>
+            <Link href="/drops" className="inline-block px-10 py-4 border border-white text-xs tracking-[0.2em] uppercase hover:bg-white hover:text-black transition-colors">Ver The Conclave</Link>
           </div>
         </section>
       </main>
