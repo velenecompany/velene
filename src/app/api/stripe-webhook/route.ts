@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
   return NextResponse.json({ received: true });
 }
 
-async function fulfillOrder(session: Stripe.CheckoutSession) {
+async function fulfillOrder(session: Stripe.Checkout.Session) {
   if (session.payment_status !== 'paid') return;
 
   const { email, user_id, items: itemsJson, coupon_code } = session.metadata!;
