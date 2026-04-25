@@ -16,7 +16,7 @@ export default function HeroParallax() {
 
   return (
     <div ref={ref} style={{position:'absolute',inset:0,top:'-10%',height:'120%'}}>
-      <img src="/drop-1.jpg" alt="VELENÉ" style={{width:'100%',height:'100%',objectFit:'cover',objectPosition:'center center'}} />
+      <img src="/PORTADA.jpg" alt="VELENÉ" style={{width:'100%',height:'100%',objectFit:'cover',objectPosition:'center center'}} />
     </div>
   );
 }

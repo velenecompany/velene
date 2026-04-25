@@ -3,7 +3,7 @@ import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 
 const SETS = [
-  { img: '/drop-1.jpg', color: 'Rosa', slug: 'set-conclave-rosa', precio: '$899' },
+  { img: '/PORTADA.jpg', color: 'Rosa', slug: 'set-conclave-rosa', precio: '$899' },
   { img: '/IMG_9367.jpg', color: 'Beige', slug: 'set-conclave-beige', precio: '$899' },
   { img: '/mockup-azul.jpg', color: 'Azul', slug: 'set-conclave-azul', precio: '$899' },
 ];
