@@ -5,7 +5,7 @@ import Footer from '@/components/layout/Footer';
 import Link from 'next/link';
 import { addToCart } from '@/store/cart';
 
-const FOTOS = ['/mockup-beige-completo.jpg', '/mockup-frontal-beige-2.jpg', '/IMG_9367.jpg', '/IMG_9083.jpg', '/IMG_9369.jpg'];
+const FOTOS = ['/IMG_9367.jpg', '/IMG_9083.jpg', '/IMG_9369.jpg', '/mockup-beige-completo.jpg', '/mockup-frontal-beige-2.jpg'];
 
 export default function ProductoBeige() {
   const [fotoActiva, setFotoActiva] = useState(0);
