@@ -17,7 +17,7 @@ export default function HomePage() {
               Luxury in<br />Defiance.
             </h1>
             <div className="flex gap-4">
-              <Link href="/shop" className="px-8 py-4 bg-white text-black text-xs tracking-[0.2em] uppercase hover:bg-stone-200 transition-colors">Shop ahora</Link>
+              
               <Link href="/drops" className="px-8 py-4 border border-white text-white text-xs tracking-[0.2em] uppercase hover:bg-white/10 transition-colors">Ver colección</Link>
             </div>
           </div>
@@ -30,7 +30,7 @@ export default function HomePage() {
                 <p className="text-[10px] tracking-[0.25em] uppercase text-stone-400 mb-2">Drop 001</p>
                 <p className="font-display text-4xl font-light">The Conclave</p>
               </div>
-              <Link href="/shop" className="text-[11px] tracking-[0.15em] uppercase text-stone-500 border-b border-stone-300 pb-px">Ver todo</Link>
+              
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-stone-200">
               {[
