@@ -45,7 +45,7 @@ export default function Navbar() {
       </nav>
       {menuOpen && (
         <div className="md:hidden bg-[#FAFAF8] border-t border-[#E2DDD8] px-6 py-8">
-'Drops', 'About', 'Account', 'Cart'
+{['Drops', 'About', 'Account', 'Cart'].map(item => (
             <Link key={item} href={`/${item.toLowerCase()}`}
               className="block text-sm tracking-[0.15em] uppercase py-3 border-b border-[#E2DDD8] last:border-0"
               onClick={() => setMenuOpen(false)}>
