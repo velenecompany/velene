@@ -9,7 +9,7 @@ const SETS = [
 ];
 
 const TSHIRTS = [
-  { img: '/IMG_9080.jpg', color: 'Rosa', slug: 'playera-conclave-rosa', precio: '$599' },
+  { img: '/IMG_9077.jpg', color: 'Rosa', slug: 'playera-conclave-rosa', precio: '$599' },
   { img: '/IMG_9367.jpg', color: 'Beige', slug: 'playera-conclave-beige', precio: '$599' },
   { img: '/IMG_9368.jpg', color: 'Azul', slug: 'playera-conclave-azul', precio: '$599' },
 ];
