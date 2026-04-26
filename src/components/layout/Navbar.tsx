@@ -29,20 +29,26 @@ export default function Navbar() {
         <Link href="/" className="font-display text-2xl font-light tracking-[0.2em] uppercase absolute left-1/2 -translate-x-1/2">VELENÉ</Link>
         <div className="hidden md:flex items-center gap-6">
           <Link href="/about" className="text-[11px] tracking-[0.15em] uppercase text-stone-500 hover:text-stone-900 transition-colors">About</Link>
+          <Link href="/cart" className="text-[11px] tracking-[0.15em] uppercase text-stone-900 border-b border-stone-900 pb-px">
+            {count > 0 ? `Cart (${count})` : 'Cart'}
+          </Link>
         </div>
-        <button className="md:hidden ml-auto" onClick={() => setMenuOpen(!menuOpen)}>
+        <button className="md:hidden ml-auto mr-4" onClick={() => setMenuOpen(!menuOpen)}>
           <div className={`w-5 h-px bg-stone-900 transition-all mb-1.5 ${menuOpen ? 'rotate-45 translate-y-2' : ''}`} />
           <div className={`w-5 h-px bg-stone-900 transition-all mb-1.5 ${menuOpen ? 'opacity-0' : ''}`} />
           <div className={`w-5 h-px bg-stone-900 transition-all ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
         </button>
+        <Link href="/cart" className="md:hidden text-[11px] tracking-[0.15em] uppercase text-stone-900">
+          {count > 0 ? `(${count})` : 'Cart'}
+        </Link>
       </nav>
       {menuOpen && (
         <div className="md:hidden bg-[#FAFAF8] border-t border-[#E2DDD8] px-6 py-8">
-          {['Drops', 'About'].map(item => (
+          {['Drops', 'About', 'Cart'].map(item => (
             <Link key={item} href={`/${item.toLowerCase()}`}
               className="block text-sm tracking-[0.15em] uppercase py-3 border-b border-[#E2DDD8] last:border-0"
               onClick={() => setMenuOpen(false)}>
-              {item}
+              {item}{item === 'Cart' && count > 0 ? ` (${count})` : ''}
             </Link>
           ))}
         </div>
