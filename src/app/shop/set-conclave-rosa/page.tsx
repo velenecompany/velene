@@ -5,7 +5,7 @@ import Footer from '@/components/layout/Footer';
 import Link from 'next/link';
 import { addToCart } from '@/store/cart';
 
-const FOTOS = ['/IMG_9375.jpg', '/IMG_9371.jpg', '/IMG_9376.jpg', '/PORTADA.jpg', '/muckup rosa detras.jpg', '/PHOTO-2026-04-25-01-02-36.jpg'];
+const FOTOS = ['/IMG_9375.jpg', '/IMG_9371.jpg', '/IMG_9376.jpg', '/PORTADA-OF.jpg', '/muckup rosa detras.jpg', '/PHOTO-2026-04-25-01-02-36.jpg'];
 
 export default function ProductoRosa() {
   const [fotoActiva, setFotoActiva] = useState(0);

@@ -34,7 +34,7 @@ export default function HomePage() {
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-stone-200">
               {[
-                { img: '/PORTADA OF.jpg', name: 'Set Conclave Rosa', price: 899, tag: 'Nuevo', slug: 'set-conclave-rosa' },
+                { img: '/PORTADA-OF.jpg', name: 'Set Conclave Rosa', price: 899, tag: 'Nuevo', slug: 'set-conclave-rosa' },
                 { img: '/IMG_9367.jpg', name: 'Set Conclave Beige', price: 899, tag: 'Nuevo', slug: 'set-conclave-beige' },
                 { img: '/IMG_9368.jpg', name: 'Set Conclave Azul', price: 899, comparePrice: 549, tag: 'Oferta', slug: 'set-conclave-azul' },
               ].map((p, i) => (
