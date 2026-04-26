@@ -32,7 +32,7 @@ export default function ProductoRosa() {
       <main className="pt-16 min-h-screen">
         <div className="max-w-screen-xl mx-auto px-6 py-8">
           <p className="text-[11px] text-stone-400 mb-8">
-            <Link href="/" className="hover:text-stone-700">Inicio</Link> / <Link href="/shop" className="hover:text-stone-700">Shop</Link> / Set Conclave Rosa
+            <Link href="/" className="hover:text-stone-700">Inicio</Link> / Set Conclave Rosa
           </p>
           <div className="grid md:grid-cols-2 gap-16">
             <div>
