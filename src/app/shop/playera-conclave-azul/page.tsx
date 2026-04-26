@@ -5,7 +5,7 @@ import Footer from '@/components/layout/Footer';
 import Link from 'next/link';
 import { addToCart } from '@/store/cart';
 
-const FOTOS = ['/mockup-azul.jpg', '/IMG_9077.jpg', '/IMG_9078.jpg', '/IMG_9079.jpg', '/IMG_9080.jpg'];
+const FOTOS = ['/IMG_9368.jpg', '/IMG_9377.jpg', '/IMG_9082.jpg', '/muckup azul completo.jpg', '/muckup azul detras.jpg'];
 
 export default function PlayeraAzul() {
   const [fotoActiva, setFotoActiva] = useState(0);
