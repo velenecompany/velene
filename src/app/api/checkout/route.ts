@@ -11,8 +11,7 @@ export async function POST(req: NextRequest) {
       currency: 'mxn',
       product_data: {
         name: item.nombre,
-        images: item.imagen ? [`https://velene.vercel.app${item.imagen}`] : [],
-      },
+images: item.imagen ? ["https://velene.vercel.app" + item.imagen] : [],      },
       unit_amount: Math.round(item.precio * 100),
     },
     quantity: item.cantidad,
@@ -54,7 +53,7 @@ export async function POST(req: NextRequest) {
       currency: 'mxn',
       product_data: {
         name: item.nombre,
-        images: item.imagen ? [`https://velene.vercel.app${item.imagen}`] : [],
+        images: item.imagen ? ["https://velene.vercel.app" + item.imagen] : [],
       },
       unit_amount: Math.round(item.precio * 100),
     },
