@@ -5,7 +5,7 @@ import Footer from '@/components/layout/Footer';
 import Link from 'next/link';
 import { addToCart } from '@/store/cart';
 
-const FOTOS = ['/IMG_9368.jpg', '/IMG_9377.jpg', '/IMG_9369.jpg', '/IMG_9370.jpg', '/mockup-azul.jpg'];
+const FOTOS = ['/IMG_9368.jpg', '/IMG_9377.jpg', '/IMG_9370.jpg', '/muckup azul detras.jpg', '/muckup azul completo.jpg'];
 
 export default function ProductoAzul() {
   const [fotoActiva, setFotoActiva] = useState(0);
@@ -19,7 +19,7 @@ export default function ProductoAzul() {
       slug: 'set-conclave-azul',
       nombre: 'Set Conclave Azul',
       talla: tallaSeleccionada,
-      precio: 899,
+      precio: 599,
       imagen: '/IMG_9368.jpg',
     });
     setAgregado(true);
@@ -52,9 +52,9 @@ export default function ProductoAzul() {
               <p className="text-[10px] tracking-[0.2em] uppercase text-stone-400 mb-3">The Conclave · Drop 001</p>
               <h1 className="font-display text-5xl font-light mb-4">Set Conclave Azul</h1>
               <div className="flex items-baseline gap-3 mb-2">
-                <p className="font-display text-3xl">$899 <span className="text-sm font-sans text-stone-400">MXN</span></p>
-                <p className="font-display text-xl text-stone-400 line-through">$549</p>
-                <span className="text-[9px] tracking-[0.15em] uppercase bg-black text-white px-2 py-1">Oferta</span>
+<p className="font-display text-xl text-stone-400 line-through mb-1">$899 <span className="text-sm font-sans">MXN</span></p>
+<p className="font-display text-3xl">$599 <span className="text-sm font-sans text-stone-400">MXN</span></p>
+<span className="text-[9px] tracking-[0.15em] uppercase bg-black text-white px-2 py-1">Oferta</span>
               </div>
               <p className="text-[11px] text-emerald-600 tracking-wide mb-8">✓ Envío gratis</p>
               <p className="text-sm text-stone-500 leading-relaxed mb-8">Diseño posterior desarrollado mediante serigrafía de alta calidad, garantizando definición, resistencia y presencia visual duradera. Logotipo frontal elaborado con bordado premium, aportando textura, identidad y acabado superior.</p>
