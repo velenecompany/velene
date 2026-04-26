@@ -5,7 +5,7 @@ import Footer from '@/components/layout/Footer';
 import Link from 'next/link';
 import { addToCart } from '@/store/cart';
 
-const FOTOS = ['/mockup-beige.jpg', '/IMG_9367.jpg', '/IMG_9083.jpg', '/IMG_9369.jpg', '/mockup-frontal-beige-2.jpg', '/mockup-beige-completo.jpg'];
+const FOTOS = ['/IMG_9367.jpg', '/IMG_9083.jpg', '/IMG_9369.jpg', '/mockup-frontal-beige-2.jpg', '/mockup-beige-completo.jpg'];
 
 export default function PlayeraBeige() {
   const [fotoActiva, setFotoActiva] = useState(0);
@@ -14,7 +14,7 @@ export default function PlayeraBeige() {
 
   function agregarCarrito() {
     if (!tallaSeleccionada) { alert('Selecciona una talla'); return; }
-    addToCart({ id: 'playera-conclave-beige', slug: 'playera-conclave-beige', nombre: 'The Conclave T-Shirt Beige', talla: tallaSeleccionada, precio: 599, imagen: '/mockup-beige.jpg' });
+    addToCart({ id: 'playera-conclave-beige', slug: 'playera-conclave-beige', nombre: 'The Conclave T-Shirt Beige', talla: tallaSeleccionada, precio: 599, imagen: '/IMG_9367.jpg' });
     setAgregado(true);
     setTimeout(() => setAgregado(false), 2000);
   }
