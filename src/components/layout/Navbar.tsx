@@ -28,7 +28,8 @@ export default function Navbar() {
         </div>
         <Link href="/" className="font-display text-2xl font-light tracking-[0.2em] uppercase absolute left-1/2 -translate-x-1/2">VELENÉ</Link>
         <div className="hidden md:flex items-center gap-6">
-          <Link href="/about" className="text-[11px] tracking-[0.15em] uppercase text-stone-500 hover:text-stone-900 transition-colors">About</Link>
+<Link href="/about" className="text-[11px] tracking-[0.15em] uppercase text-stone-500 hover:text-stone-900 transition-colors">About</Link>
+          <Link href="/account" className="text-[11px] tracking-[0.15em] uppercase text-stone-500 hover:text-stone-900 transition-colors">Account</Link>
           <Link href="/cart" className="text-[11px] tracking-[0.15em] uppercase text-stone-900 border-b border-stone-900 pb-px">
             {count > 0 ? `Cart (${count})` : 'Cart'}
           </Link>
@@ -44,7 +45,7 @@ export default function Navbar() {
       </nav>
       {menuOpen && (
         <div className="md:hidden bg-[#FAFAF8] border-t border-[#E2DDD8] px-6 py-8">
-          {['Drops', 'About', 'Cart'].map(item => (
+'Drops', 'About', 'Account', 'Cart'
             <Link key={item} href={`/${item.toLowerCase()}`}
               className="block text-sm tracking-[0.15em] uppercase py-3 border-b border-[#E2DDD8] last:border-0"
               onClick={() => setMenuOpen(false)}>
