@@ -1,11 +1,13 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import Navbar from '@/components/layout/Navbar';
+import Footer from '@/components/layout/Footer';
 import { getCart, limpiar, CartItem } from '@/store/cart';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 
-function Field({ label, placeholder, type = 'text', value, onChange }: { 
-  label: string; placeholder: string; type?: string; value: string; onChange: (v: string) => void 
+function Field({ label, placeholder, type = 'text', value, onChange }: {
+  label: string; placeholder: string; type?: string; value: string; onChange: (v: string) => void
 }) {
   return (
     <div>
@@ -16,9 +18,10 @@ function Field({ label, placeholder, type = 'text', value, onChange }: {
   );
 }
 
-export default function CheckoutPage() {
+function CheckoutContent() {
+  const searchParams = useSearchParams();
+  const success = searchParams.get('success');
   const [items, setItems] = useState<CartItem[]>([]);
-  const [step, setStep] = useState<'info' | 'payment' | 'done'>('info');
   const [loading, setLoading] = useState(false);
   const [nombre, setNombre] = useState('');
   const [apellido, setApellido] = useState('');
@@ -26,55 +29,32 @@ export default function CheckoutPage() {
   const [direccion, setDireccion] = useState('');
   const [ciudad, setCiudad] = useState('');
   const [cp, setCp] = useState('');
-  const [tarjeta, setTarjeta] = useState('');
-  const [vencimiento, setVencimiento] = useState('');
-  const [cvv, setCvv] = useState('');
-  const [orderNum, setOrderNum] = useState('');
 
-  useEffect(() => { setItems(getCart()); }, []);
+  useEffect(() => {
+    setItems(getCart());
+    if (success) limpiar();
+  }, [success]);
 
   const total = items.reduce((a, i) => a + i.precio * i.cantidad, 0);
 
-  function formatTarjeta(val: string) {
-    const nums = val.replace(/\D/g, '').slice(0, 16);
-    return nums.replace(/(.{4})/g, '$1 ').trim();
-  }
-
-  function formatVencimiento(val: string) {
-    const nums = val.replace(/\D/g, '').slice(0, 4);
-    if (nums.length > 2) return nums.slice(0, 2) + '/' + nums.slice(2);
-    return nums;
-  }
-
   async function handlePagar() {
-    if (!tarjeta || !vencimiento || !cvv) { alert('Llena los datos de tu tarjeta'); return; }
+    if (!nombre || !email || !direccion || !ciudad || !cp) { alert('Llena todos los campos'); return; }
     setLoading(true);
     try {
-      const stripeRes = await fetch('/api/stripe/payment-intent', {
+      const res = await fetch('/api/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ totalMxn: total }),
+        body: JSON.stringify({ items, email, nombre, apellido, direccion, ciudad, cp }),
       });
-      const stripeData = await stripeRes.json();
-
-      if (stripeData.clientSecret) {
-        const orderRes = await fetch('/api/orders', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, nombre, apellido, direccion, ciudad, cp, items, total }),
-        });
-        const orderData = await orderRes.json();
-        setOrderNum(orderData.data.orderNumber);
-        limpiar();
-        setStep('done');
-      }
+      const data = await res.json();
+      if (data.url) window.location.href = data.url;
     } catch {
-      alert('Error al procesar el pago. Intenta de nuevo.');
+      alert('Error al procesar. Intenta de nuevo.');
     }
     setLoading(false);
   }
 
-  if (step === 'done') {
+  if (success) {
     return (
       <>
         <Navbar />
@@ -83,7 +63,6 @@ export default function CheckoutPage() {
             <div className="w-16 h-16 border border-black rounded-full flex items-center justify-center mx-auto mb-8 text-2xl">✓</div>
             <h1 className="font-display text-5xl font-light mb-4">Pedido confirmado</h1>
             <p className="text-sm text-stone-500 max-w-sm mx-auto mb-8">Gracias por tu compra. Recibirás un email con los detalles de tu pedido.</p>
-            <p className="font-display text-2xl mb-8">#{orderNum}</p>
             <Link href="/" className="text-[11px] tracking-[0.2em] uppercase border-b border-stone-900 pb-px">Continuar comprando</Link>
           </div>
         </main>
@@ -98,71 +77,23 @@ export default function CheckoutPage() {
         <div className="max-w-screen-lg mx-auto px-6 py-12">
           <h1 className="font-display text-4xl font-light mb-10">Checkout</h1>
           <div className="grid md:grid-cols-[1fr_360px] gap-16">
-            <div>
-              <div className="flex gap-8 mb-10 border-b border-stone-100 pb-4">
-                {[['info', 'Datos de envio'], ['payment', 'Pago']].map(([s, label], i) => (
-                  <span key={s} className={`text-[11px] tracking-[0.15em] uppercase pb-4 -mb-px ${step === s ? 'border-b border-black text-black' : 'text-stone-400'}`}>
-                    {i + 1}. {label}
-                  </span>
-                ))}
+            <div className="space-y-4">
+              <div className="grid grid-cols-2 gap-4">
+                <Field label="Nombre" placeholder="Tu nombre" value={nombre} onChange={setNombre} />
+                <Field label="Apellido" placeholder="Tu apellido" value={apellido} onChange={setApellido} />
               </div>
-
-              {step === 'info' && (
-                <div className="space-y-4">
-                  <div className="grid grid-cols-2 gap-4">
-                    <Field label="Nombre" placeholder="Tu nombre" value={nombre} onChange={setNombre} />
-                    <Field label="Apellido" placeholder="Tu apellido" value={apellido} onChange={setApellido} />
-                  </div>
-                  <Field label="Email" placeholder="tu@email.com" type="email" value={email} onChange={setEmail} />
-                  <Field label="Direccion" placeholder="Calle y numero" value={direccion} onChange={setDireccion} />
-                  <div className="grid grid-cols-2 gap-4">
-                    <Field label="Ciudad" placeholder="Guadalajara" value={ciudad} onChange={setCiudad} />
-                    <Field label="Codigo postal" placeholder="45000" value={cp} onChange={setCp} />
-                  </div>
-                  <button onClick={() => {
-                    if (!nombre || !email || !direccion || !ciudad || !cp) { alert('Llena todos los campos'); return; }
-                    setStep('payment');
-                  }} className="w-full mt-4 py-4 bg-black text-white text-xs tracking-[0.2em] uppercase hover:bg-stone-800 transition-colors">
-                    Continuar al pago
-                  </button>
-                </div>
-              )}
-
-              {step === 'payment' && (
-                <div className="space-y-4">
-                  <p className="text-xs text-stone-400 tracking-wider mb-2">Pago seguro procesado por Stripe</p>
-                  <div>
-                    <label className="block text-[10px] tracking-[0.15em] uppercase text-stone-500 mb-2">Numero de tarjeta</label>
-                    <input placeholder="4242 4242 4242 4242" value={tarjeta}
-                      onChange={e => setTarjeta(formatTarjeta(e.target.value))}
-                      className="w-full border border-stone-200 px-4 py-3 text-sm focus:outline-none focus:border-stone-500 bg-white" />
-                  </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-[10px] tracking-[0.15em] uppercase text-stone-500 mb-2">Vencimiento</label>
-                      <input placeholder="MM/AA" value={vencimiento}
-                        onChange={e => setVencimiento(formatVencimiento(e.target.value))}
-                        className="w-full border border-stone-200 px-4 py-3 text-sm focus:outline-none focus:border-stone-500 bg-white" />
-                    </div>
-                    <div>
-                      <label className="block text-[10px] tracking-[0.15em] uppercase text-stone-500 mb-2">CVV</label>
-                      <input placeholder="123" type="password" value={cvv} maxLength={4}
-                        onChange={e => setCvv(e.target.value.replace(/\D/g, '').slice(0, 4))}
-                        className="w-full border border-stone-200 px-4 py-3 text-sm focus:outline-none focus:border-stone-500 bg-white" />
-                    </div>
-                  </div>
-                  <button onClick={handlePagar} disabled={loading}
-                    className="w-full mt-4 py-4 bg-black text-white text-xs tracking-[0.2em] uppercase hover:bg-stone-800 transition-colors disabled:opacity-50">
-                    {loading ? 'Procesando...' : `Pagar $${total.toLocaleString('es-MX')} MXN`}
-                  </button>
-                  <p className="text-[10px] text-center text-stone-400 tracking-wide">Encriptado SSL · Powered by Stripe</p>
-                  <button onClick={() => setStep('info')} className="w-full text-[11px] text-stone-400 uppercase tracking-wider mt-2">
-                    Volver a datos de envio
-                  </button>
-                </div>
-              )}
+              <Field label="Email" placeholder="tu@email.com" type="email" value={email} onChange={setEmail} />
+              <Field label="Direccion" placeholder="Calle y numero" value={direccion} onChange={setDireccion} />
+              <div className="grid grid-cols-2 gap-4">
+                <Field label="Ciudad" placeholder="Guadalajara" value={ciudad} onChange={setCiudad} />
+                <Field label="Codigo postal" placeholder="45000" value={cp} onChange={setCp} />
+              </div>
+              <button onClick={handlePagar} disabled={loading}
+                className="w-full mt-4 py-4 bg-black text-white text-xs tracking-[0.2em] uppercase hover:bg-stone-800 transition-colors disabled:opacity-50">
+                {loading ? 'Redirigiendo...' : `Pagar $${total.toLocaleString('es-MX')} MXN`}
+              </button>
+              <p className="text-[10px] text-center text-stone-400 tracking-wide">Pago seguro · Powered by Stripe</p>
             </div>
-
             <div className="bg-[#F5F2ED] p-6 h-fit">
               <p className="text-[10px] tracking-[0.2em] uppercase text-stone-400 mb-4">Tu pedido</p>
               {items.map((item, k) => (
@@ -184,6 +115,15 @@ export default function CheckoutPage() {
           </div>
         </div>
       </main>
+      <Footer />
     </>
+  );
+}
+
+export default function CheckoutPage() {
+  return (
+    <Suspense>
+      <CheckoutContent />
+    </Suspense>
   );
 }
