@@ -4,8 +4,7 @@ import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import Link from 'next/link';
 
-const FOUNDING_SPOTS = 25;
-const SPOTS_TAKEN = 3;
+const FOUNDING_SPOTS = 30;
 
 const TIERS = [
   {
@@ -48,7 +47,27 @@ const TIERS = [
 ];
 
 export default function MembershipPage() {
-  const [selected, setSelected] = useState<string | null>(null);
+const [selected, setSelected] = useState<string | null>(null);
+  const [spotsLeft, setSpotsLeft] = useState(25);
+  const [showFoundingForm, setShowFoundingForm] = useState(false);
+  const [foundingEmail, setFoundingEmail] = useState('');
+  const [foundingNombre, setFoundingNombre] = useState('');
+  const [foundingMsg, setFoundingMsg] = useState('');
+
+  useEffect(() => {
+    fetch('/api/founding-member').then(r => r.json()).then(d => setSpotsLeft(25 - d.spots_taken));
+  }, []);
+
+  async function joinFounding() {
+    const res = await fetch('/api/founding-member', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ email: foundingEmail, nombre: foundingNombre })
+    });
+    const d = await res.json();
+    if (res.ok) setFoundingMsg('¡Bienvenido a los Founding Members!');
+    else setFoundingMsg(d.error || 'Algo salió mal');
+  }
   const spotsLeft = FOUNDING_SPOTS - SPOTS_TAKEN;
 
   return (
@@ -94,9 +113,20 @@ export default function MembershipPage() {
                 </div>
               ))}
               <div className="pt-4">
-                <button className="w-full py-4 bg-black text-white text-xs tracking-[0.2em] uppercase hover:bg-stone-800 transition-colors">
-                  Unirme como Founding Member
-                </button>
+{!showFoundingForm ? (
+                  <button onClick={() => setShowFoundingForm(true)} className="w-full py-4 bg-black text-white text-xs tracking-[0.2em] uppercase hover:bg-stone-800 transition-colors">
+                    Unirme como Founding Member
+                  </button>
+                ) : (
+                  <div className="space-y-3">
+                    <input value={foundingNombre} onChange={e => setFoundingNombre(e.target.value)} placeholder="Tu nombre" className="w-full border border-stone-200 px-4 py-3 text-sm focus:outline-none focus:border-stone-900" />
+                    <input value={foundingEmail} onChange={e => setFoundingEmail(e.target.value)} placeholder="Tu email" type="email" className="w-full border border-stone-200 px-4 py-3 text-sm focus:outline-none focus:border-stone-900" />
+                    {foundingMsg && <p className="text-xs text-emerald-600">{foundingMsg}</p>}
+                    <button onClick={joinFounding} className="w-full py-4 bg-black text-white text-xs tracking-[0.2em] uppercase hover:bg-stone-800 transition-colors">
+                      Confirmar
+                    </button>
+                  </div>
+                )}
                 <p className="text-[10px] text-stone-400 text-center mt-2">Quedan {spotsLeft} spots · Completamente gratis</p>
               </div>
             </div>
