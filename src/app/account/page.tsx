@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 
+import Link from 'next/link';
 type Section = 'menu' | 'pedidos' | 'datos' | 'direcciones';
 
 export default function AccountPage() {
