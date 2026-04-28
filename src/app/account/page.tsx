@@ -141,7 +141,7 @@ export default function AccountPage() {
                         <span className="text-[9px] tracking-[0.15em] uppercase bg-emerald-50 text-emerald-600 px-2 py-1">{p.status}</span>
                       </div>
                       <p className="text-xs text-stone-400 mb-1">{new Date(p.created_at).toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
-                      <p className="font-display text-xl">${parseFloat(p.total_mxn).toLocaleString('es-MX')} MXN</p>
+                      <p className="font-display text-xl">{parseFloat(p.total_mxn).toLocaleString('es-MX')} MXN</p>
                     </div>
                   ))}
                 </div>
@@ -157,13 +157,11 @@ export default function AccountPage() {
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-[10px] tracking-[0.15em] uppercase text-stone-500 mb-2">Nombre</label>
-                    <input value={nombre} onChange={e => setNombre(e.target.value)}
-                      className="w-full border border-stone-200 px-4 py-3 text-sm focus:outline-none focus:border-stone-500" />
+                    <input value={nombre} onChange={e => setNombre(e.target.value)} className="w-full border border-stone-200 px-4 py-3 text-sm focus:outline-none focus:border-stone-500" />
                   </div>
                   <div>
                     <label className="block text-[10px] tracking-[0.15em] uppercase text-stone-500 mb-2">Apellido</label>
-                    <input value={apellido} onChange={e => setApellido(e.target.value)}
-                      className="w-full border border-stone-200 px-4 py-3 text-sm focus:outline-none focus:border-stone-500" />
+                    <input value={apellido} onChange={e => setApellido(e.target.value)} className="w-full border border-stone-200 px-4 py-3 text-sm focus:outline-none focus:border-stone-500" />
                   </div>
                 </div>
                 <div>
@@ -173,16 +171,12 @@ export default function AccountPage() {
                 <div className="border-t border-stone-100 pt-4">
                   <p className="text-[10px] tracking-[0.15em] uppercase text-stone-500 mb-4">Cambiar contrasena</p>
                   <div className="space-y-3">
-                    <input type="password" placeholder="Contrasena actual" value={passwordActual} onChange={e => setPasswordActual(e.target.value)}
-                      className="w-full border border-stone-200 px-4 py-3 text-sm focus:outline-none focus:border-stone-500" />
-                    <input type="password" placeholder="Nueva contrasena" value={passwordNuevo} onChange={e => setPasswordNuevo(e.target.value)}
-                      className="w-full border border-stone-200 px-4 py-3 text-sm focus:outline-none focus:border-stone-500" />
+                    <input type="password" placeholder="Contrasena actual" value={passwordActual} onChange={e => setPasswordActual(e.target.value)} className="w-full border border-stone-200 px-4 py-3 text-sm focus:outline-none focus:border-stone-500" />
+                    <input type="password" placeholder="Nueva contrasena" value={passwordNuevo} onChange={e => setPasswordNuevo(e.target.value)} className="w-full border border-stone-200 px-4 py-3 text-sm focus:outline-none focus:border-stone-500" />
                   </div>
                 </div>
                 {msg && <p className="text-xs text-emerald-600 tracking-wide">{msg}</p>}
-                <button onClick={guardarDatos} className="w-full py-4 bg-black text-white text-xs tracking-[0.2em] uppercase hover:bg-stone-800 transition-colors">
-                  Guardar cambios
-                </button>
+                <button onClick={guardarDatos} className="w-full py-4 bg-black text-white text-xs tracking-[0.2em] uppercase hover:bg-stone-800 transition-colors">Guardar cambios</button>
               </div>
             </>
           )}
@@ -194,22 +188,27 @@ export default function AccountPage() {
               <div className="space-y-4">
                 <div>
                   <label className="block text-[10px] tracking-[0.15em] uppercase text-stone-500 mb-2">Calle y numero</label>
-                  <input value={direccion} onChange={e => setDireccion(e.target.value)}
-                    className="w-full border border-stone-200 px-4 py-3 text-sm focus:outline-none focus:border-stone-500" />
+                  <input value={direccion} onChange={e => setDireccion(e.target.value)} className="w-full border border-stone-200 px-4 py-3 text-sm focus:outline-none focus:border-stone-500" />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-[10px] tracking-[0.15em] uppercase text-stone-500 mb-2">Ciudad</label>
-                    <input value={ciudad} onChange={e => setCiudad(e.target.value)}
-                      className="w-full border border-stone-200 px-4 py-3 text-sm focus:outline-none focus:border-stone-500" />
+                    <input value={ciudad} onChange={e => setCiudad(e.target.value)} className="w-full border border-stone-200 px-4 py-3 text-sm focus:outline-none focus:border-stone-500" />
                   </div>
                   <div>
                     <label className="block text-[10px] tracking-[0.15em] uppercase text-stone-500 mb-2">Codigo postal</label>
-                    <input value={cp} onChange={e => setCp(e.target.value)}
-                      className="w-full border border-stone-200 px-4 py-3 text-sm focus:outline-none focus:border-stone-500" />
+                    <input value={cp} onChange={e => setCp(e.target.value)} className="w-full border border-stone-200 px-4 py-3 text-sm focus:outline-none focus:border-stone-500" />
                   </div>
                 </div>
                 {msg && <p className="text-xs text-emerald-600 tracking-wide">{msg}</p>}
-                <button onClick={guardarDireccion} className="w-full py-4 bg-black text-white text-xs tracking-[0.2em] uppercase hover:bg-stone-800 transition-colors">
-                  Guardar direccion
-                </button>
+                <button onClick={guardarDireccion} className="w-full py-4 bg-black text-white text-xs tracking-[0.2em] uppercase hover:bg-stone-800 transition-colors">Guardar direccion</button>
+              </div>
+            </>
+          )}
+
+        </div>
+      </main>
+      <Footer />
+    </>
+  );
+}
