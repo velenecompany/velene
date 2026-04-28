@@ -94,7 +94,7 @@ const [selected, setSelected] = useState<string | null>(null);
               <p className="text-[10px] tracking-[0.25em] uppercase text-stone-400 mb-4">Founding Members · Gratis de por vida</p>
               <h2 className="font-display text-4xl font-light mb-6">Entra ahora.<br />Permanece para siempre.</h2>
               <p className="text-sm text-stone-500 leading-relaxed">
-                Solo 25 personas tendrán acceso completo a todo lo que Velené construye — antes que nadie, mejor que nadie.
+                Solo 30 personas tendrán acceso completo a todo lo que Velené construye — antes que nadie, mejor que nadie.
               </p>
             </div>
             <div className="space-y-4">
