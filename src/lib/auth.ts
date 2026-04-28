@@ -39,7 +39,7 @@ export async function getSessionUser(): Promise<User | null> {
   const payload = verifyToken(token);
   if (!payload) return null;
   return queryOne<User>(
-`SELECT id, email, first_name AS firstName, last_name AS lastName, created_at
+`SELECT id, email, first_name AS firstName, last_name AS lastName, created_at, total_spent, membership_tier
      FROM users WHERE id = $1`,
     [payload.sub]
   );
