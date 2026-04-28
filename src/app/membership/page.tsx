@@ -79,7 +79,7 @@ const [selected, setSelected] = useState<string | null>(null);
           <p className="text-[10px] tracking-[0.3em] uppercase text-white/40 mb-4">Velené · Membresía</p>
           <h1 className="font-display text-5xl md:text-7xl font-light mb-6">Founding Members</h1>
           <p className="text-sm text-white/60 max-w-md mx-auto leading-relaxed mb-10">
-            Las primeras 25 personas que se unan a Velené tendrán acceso de por vida a preventas, descuentos exclusivos y drops privados.
+            Las primeras 30 personas que se unan a Velené tendrán acceso de por vida a preventas, descuentos exclusivos y drops privados.
           </p>
           <div className="inline-flex items-center gap-3 border border-white/20 px-6 py-3">
             <span className="font-display text-2xl font-light">{spotsLeft}</span>
