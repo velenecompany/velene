@@ -125,7 +125,7 @@ export default function MembershipPage() {
                   ))}
                 </div>
                 <button
-                  onClick={() => setSelected(tier.name)}
+onClick={async () => { const res = await fetch('/api/membership/checkout', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({tier: tier.name})}); const {url} = await res.json(); window.location.href = url; }}
                   className={`w-full py-4 text-xs tracking-[0.2em] uppercase transition-colors ${
                     tier.featured
                       ? 'bg-white text-black hover:bg-stone-100'
