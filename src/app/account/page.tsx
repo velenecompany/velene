@@ -98,7 +98,13 @@ export default function AccountPage() {
               </div>
               <button onClick={cerrarSesion} className="mt-8 text-[11px] tracking-[0.15em] uppercase text-stone-400 hover:text-stone-700 transition-colors">
                 Cerrar sesion
-              </button>
+              </button><Link href="/membership" className="bg-white p-6 hover:bg-[#F5F2ED] transition-colors text-left flex justify-between items-center">
+                  <div>
+                    <p className="text-sm font-medium mb-1">Membresía</p>
+                    <p className="text-xs text-stone-400">Pace · Drive · Apex</p>
+                  </div>
+                  <span className="text-stone-300">→</span>
+                </Link>
             </>
           )}
 
