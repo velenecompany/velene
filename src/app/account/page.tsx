@@ -2,8 +2,8 @@
 import { useState, useEffect } from 'react';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
-
 import Link from 'next/link';
+
 type Section = 'menu' | 'pedidos' | 'datos' | 'direcciones';
 
 export default function AccountPage() {
@@ -18,6 +18,7 @@ export default function AccountPage() {
   const [ciudad, setCiudad] = useState('');
   const [cp, setCp] = useState('');
   const [msg, setMsg] = useState('');
+  const [isFounder, setIsFounder] = useState(false);
 
   useEffect(() => {
     fetch('/api/auth/me')
@@ -27,6 +28,12 @@ export default function AccountPage() {
           setUser(d.data);
           setNombre(d.data.firstName || '');
           setApellido(d.data.lastName || '');
+          fetch('/api/founding-member?list=true')
+            .then(r => r.json())
+            .then(fm => {
+              const found = (fm.founders || []).some((f: any) => f.email === d.data.email);
+              setIsFounder(found);
+            });
         } else {
           window.location.href = '/login';
         }
@@ -35,7 +42,7 @@ export default function AccountPage() {
 
   async function loadPedidos() {
     if (!user) return;
-    const res = await fetch(`/api/orders?email=${user.email}`);
+    const res = await fetch('/api/orders?email=' + user.email);
     const d = await res.json();
     setPedidos(d.data || []);
     setSection('pedidos');
@@ -73,7 +80,13 @@ export default function AccountPage() {
           {section === 'menu' && (
             <>
               <p className="text-[10px] tracking-[0.25em] uppercase text-stone-400 mb-2">Mi cuenta</p>
-              <h1 className="font-display text-4xl font-light mb-12">Hola, {user.firstName || user.email}</h1>
+              <h1 className="font-display text-4xl font-light mb-4">Hola, {user.firstName || user.email}</h1>
+              {isFounder && (
+                <div className="inline-flex items-center gap-2 bg-stone-900 text-white px-4 py-2 mb-10">
+                  <span className="text-[9px] tracking-[0.3em] uppercase">Founding Member</span>
+                </div>
+              )}
+              {!isFounder && <div className="mb-10" />}
               <div className="grid grid-cols-1 gap-px bg-stone-100">
                 <button onClick={() => { loadPedidos(); }} className="bg-white p-6 hover:bg-[#F5F2ED] transition-colors text-left flex justify-between items-center">
                   <div>
@@ -85,7 +98,7 @@ export default function AccountPage() {
                 <button onClick={() => setSection('datos')} className="bg-white p-6 hover:bg-[#F5F2ED] transition-colors text-left flex justify-between items-center">
                   <div>
                     <p className="text-sm font-medium mb-1">Datos personales</p>
-                    <p className="text-xs text-stone-400">Nombre, email y contraseña</p>
+                    <p className="text-xs text-stone-400">Nombre, email y contrasena</p>
                   </div>
                   <span className="text-stone-300">→</span>
                 </button>
@@ -96,16 +109,17 @@ export default function AccountPage() {
                   </div>
                   <span className="text-stone-300">→</span>
                 </button>
-              </div>
-              <button onClick={cerrarSesion} className="mt-8 text-[11px] tracking-[0.15em] uppercase text-stone-400 hover:text-stone-700 transition-colors">
-                Cerrar sesion
-              </button><Link href="/membership" className="bg-white p-6 hover:bg-[#F5F2ED] transition-colors text-left flex justify-between items-center">
+                <Link href="/membership" className="bg-white p-6 hover:bg-[#F5F2ED] transition-colors text-left flex justify-between items-center">
                   <div>
-                    <p className="text-sm font-medium mb-1">Membresía</p>
+                    <p className="text-sm font-medium mb-1">Membresia</p>
                     <p className="text-xs text-stone-400">Pace · Drive · Apex</p>
                   </div>
                   <span className="text-stone-300">→</span>
                 </Link>
+              </div>
+              <button onClick={cerrarSesion} className="mt-8 text-[11px] tracking-[0.15em] uppercase text-stone-400 hover:text-stone-700 transition-colors">
+                Cerrar sesion
+              </button>
             </>
           )}
 
@@ -116,7 +130,7 @@ export default function AccountPage() {
               {pedidos.length === 0 ? (
                 <div className="text-center py-16">
                   <p className="font-display text-2xl text-stone-300 mb-4">Sin pedidos aun</p>
-                  <a href="/shop" className="text-[11px] tracking-[0.2em] uppercase border-b border-stone-900 pb-px">Ir a la tienda</a>
+                  <a href="/drops" className="text-[11px] tracking-[0.2em] uppercase border-b border-stone-900 pb-px">Ir a la tienda</a>
                 </div>
               ) : (
                 <div className="space-y-px bg-stone-100">
@@ -157,7 +171,7 @@ export default function AccountPage() {
                   <input value={user.email} disabled className="w-full border border-stone-100 px-4 py-3 text-sm bg-stone-50 text-stone-400" />
                 </div>
                 <div className="border-t border-stone-100 pt-4">
-                  <p className="text-[10px] tracking-[0.15em] uppercase text-stone-500 mb-4">Cambiar contraseña</p>
+                  <p className="text-[10px] tracking-[0.15em] uppercase text-stone-500 mb-4">Cambiar contrasena</p>
                   <div className="space-y-3">
                     <input type="password" placeholder="Contrasena actual" value={passwordActual} onChange={e => setPasswordActual(e.target.value)}
                       className="w-full border border-stone-200 px-4 py-3 text-sm focus:outline-none focus:border-stone-500" />
@@ -199,13 +213,3 @@ export default function AccountPage() {
                 <button onClick={guardarDireccion} className="w-full py-4 bg-black text-white text-xs tracking-[0.2em] uppercase hover:bg-stone-800 transition-colors">
                   Guardar direccion
                 </button>
-              </div>
-            </>
-          )}
-
-        </div>
-      </main>
-      <Footer />
-    </>
-  );
-}
