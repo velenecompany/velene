@@ -55,7 +55,7 @@ const [selected, setSelected] = useState<string | null>(null);
   const [foundingMsg, setFoundingMsg] = useState('');
 
   useEffect(() => {
-    fetch('/api/founding-member').then(r => r.json()).then(d => setSpotsLeft(25 - d.spots_taken));
+    fetch('/api/founding-member').then(r => r.json()).then(d => setSpotsLeft(d.spots_taken));
   }, []);
 
   async function joinFounding() {
@@ -83,7 +83,7 @@ const [selected, setSelected] = useState<string | null>(null);
           </p>
           <div className="inline-flex items-center gap-3 border border-white/20 px-6 py-3">
             <span className="font-display text-2xl font-light">{spotsLeft}</span>
-            <span className="text-[10px] tracking-[0.2em] uppercase text-white/50">de {FOUNDING_SPOTS} spots disponibles</span>
+<span className="text-[10px] tracking-[0.2em] uppercase text-white/50">de 30 founders se han unido</span>
           </div>
         </section>
 
@@ -126,7 +126,7 @@ const [selected, setSelected] = useState<string | null>(null);
                     </button>
                   </div>
                 )}
-                <p className="text-[10px] text-stone-400 text-center mt-2">Quedan {spotsLeft} spots · Completamente gratis</p>
+<p className="text-[10px] text-stone-400 text-center mt-2">{spotsLeft} de 30 founders · Completamente gratis</p>
               </div>
             </div>
           </div>
