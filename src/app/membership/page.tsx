@@ -68,7 +68,6 @@ const [selected, setSelected] = useState<string | null>(null);
     if (res.ok) setFoundingMsg('¡Bienvenido a los Founding Members!');
     else setFoundingMsg(d.error || 'Algo salió mal');
   }
-  const spotsLeft = FOUNDING_SPOTS - SPOTS_TAKEN;
 
   return (
     <>
