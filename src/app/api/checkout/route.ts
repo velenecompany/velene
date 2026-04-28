@@ -26,7 +26,12 @@ export async function POST(req: NextRequest) {
     cancel_url: 'https://velene.vercel.app/cart',
     customer_email: email,
     metadata: {
-      nombre, apellido, direccion, ciudad, cp,
+      email,
+      nombre,
+      apellido,
+      direccion,
+      ciudad,
+      cp,
       items: JSON.stringify(items),
       coupon_code: coupon_code || '',
     },
