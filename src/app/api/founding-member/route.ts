@@ -17,7 +17,18 @@ export async function POST(req: NextRequest) {
   return NextResponse.json({ success: true });
 }
 
-export async function GET() {
+export async function GET(req: NextRequest) {
+  const { searchParams } = new URL(req.url);
+  const list = searchParams.get('list');
+
+  if (list === 'true') {
+    const founders = await query<{ nombre: string; created_at: string }>(
+      'SELECT nombre, created_at FROM founding_members ORDER BY created_at ASC'
+    );
+    const count = founders.length;
+    return NextResponse.json({ founders, count });
+  }
+
   const count = await queryOne<{count: string}>('SELECT COUNT(*) as count FROM founding_members');
   return NextResponse.json({ spots_taken: parseInt(count?.count || '0') });
 }
