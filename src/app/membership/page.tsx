@@ -48,7 +48,7 @@ const TIERS = [
 
 export default function MembershipPage() {
 const [selected, setSelected] = useState<string | null>(null);
-  const [spotsLeft, setSpotsLeft] = useState(25);
+  const [spotsLeft, setSpotsLeft] = useState(30);
   const [showFoundingForm, setShowFoundingForm] = useState(false);
   const [foundingEmail, setFoundingEmail] = useState('');
   const [foundingNombre, setFoundingNombre] = useState('');
