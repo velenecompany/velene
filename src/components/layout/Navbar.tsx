@@ -29,7 +29,24 @@ export default function Navbar() {
         <Link href="/" className="font-display text-2xl font-light tracking-[0.2em] uppercase absolute left-1/2 -translate-x-1/2">VELENÉ</Link>
         <div className="hidden md:flex items-center gap-6">
 <Link href="/about" className="text-[11px] tracking-[0.15em] uppercase text-stone-500 hover:text-stone-900 transition-colors">About</Link>
-          <Link href="/account" className="text-[11px] tracking-[0.15em] uppercase text-stone-500 hover:text-stone-900 transition-colors">Account</Link>
+<div className="relative group">
+            <button className="text-[11px] tracking-[0.15em] uppercase text-stone-500 hover:text-stone-900 transition-colors">Account</button>
+            <div className="absolute right-0 top-full pt-2 opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-200 z-50">
+              <div className="bg-white border border-stone-100 shadow-lg w-72 p-6">
+                <p className="text-xs text-stone-400 mb-1">Hi, nice to see you.</p>
+                <p className="font-display text-lg font-light mb-5">Your Account</p>
+                <div className="space-y-3">
+                  <Link href="/account" className="block text-[11px] tracking-[0.15em] uppercase text-stone-600 hover:text-stone-900">Dashboard</Link>
+                  <Link href="/account" className="block text-[11px] tracking-[0.15em] uppercase text-stone-600 hover:text-stone-900">Mis Pedidos</Link>
+                  <Link href="/account" className="block text-[11px] tracking-[0.15em] uppercase text-stone-600 hover:text-stone-900">Mi Perfil</Link>
+                  <Link href="/membership" className="block text-[11px] tracking-[0.15em] uppercase text-stone-600 hover:text-stone-900">Membresía</Link>
+                </div>
+                <div className="border-t border-stone-100 mt-5 pt-4">
+                  <Link href="/login" className="block text-[11px] tracking-[0.15em] uppercase text-stone-400 hover:text-stone-900">Cerrar sesión</Link>
+                </div>
+              </div>
+            </div>
+          </div>
           <Link href="/cart" className="text-[11px] tracking-[0.15em] uppercase text-stone-900 border-b border-stone-900 pb-px">
             {count > 0 ? `Cart (${count})` : 'Cart'}
           </Link>
