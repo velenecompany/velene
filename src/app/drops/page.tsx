@@ -32,7 +32,7 @@ function precioConDescuento(precio: number, discount: number): string {
 export default function DropsPage() {
   const [drop, setDrop] = useState<any>(null);
   const [tier, setTier] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
