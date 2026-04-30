@@ -8,12 +8,12 @@ export default function HomePage() {
     <>
       <Navbar />
       <main>
-        <section className="relative flex items-end overflow-hidden" style={{minHeight:"100vh"}}>
+        <section className="relative flex items-end overflow-hidden" style={{minHeight:"70vh"}}>
           <HeroParallax />
           <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/75" />
-          <div className="relative z-10 w-full max-w-screen-xl mx-auto px-6 pb-24">
+          <div className="relative z-10 w-full max-w-screen-xl mx-auto px-6 pb-16">
             <p className="text-[11px] tracking-[0.3em] uppercase text-white/60 mb-4">The Conclave · Drop 001</p>
-            <h1 className="font-display text-[clamp(64px,10vw,130px)] font-light text-white leading-none mb-8">
+            <h1 className="font-display text-[clamp(48px,7vw,100px)] font-light text-white leading-none mb-8">
               Luxury in<br />Defiance.
             </h1>
             <div className="flex gap-4">
