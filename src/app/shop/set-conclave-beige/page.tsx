@@ -1,23 +1,34 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import Link from 'next/link';
 import { addToCart } from '@/store/cart';
 
 const FOTOS = ['/IMG_9367.jpg', '/IMG_9083.jpg', '/IMG_9369.jpg', '/mockup-beige-completo.jpg', '/mockup-frontal-beige-2.jpg'];
+const TALLAS = ['S', 'M', 'L'];
 
 export default function ProductoBeige() {
   const [fotoActiva, setFotoActiva] = useState(0);
   const [tallaSeleccionada, setTallaSeleccionada] = useState('');
   const [agregado, setAgregado] = useState(false);
+  const [inventory, setInventory] = useState<Record<string, number>>({});
+
+  useEffect(() => {
+    fetch('/api/inventory?slug=set-conclave-beige')
+      .then(r => r.json())
+      .then(setInventory);
+  }, []);
 
   function agregarCarrito() {
     if (!tallaSeleccionada) { alert('Selecciona una talla'); return; }
+    if ((inventory[tallaSeleccionada] ?? 0) === 0) return;
     addToCart({ id: 'set-conclave-beige', slug: 'set-conclave-beige', nombre: 'Set Conclave Beige', talla: tallaSeleccionada, precio: 899, imagen: '/mockup-beige-completo.jpg' });
     setAgregado(true);
     setTimeout(() => setAgregado(false), 2000);
   }
+
+  const stockTalla = tallaSeleccionada ? (inventory[tallaSeleccionada] ?? 0) : 1;
 
   return (
     <>
@@ -48,12 +59,33 @@ export default function ProductoBeige() {
               <p className="text-sm text-stone-500 leading-relaxed mb-8">Diseño posterior desarrollado mediante serigrafía de alta calidad, garantizando definición, resistencia y presencia visual duradera. Logotipo frontal elaborado con bordado premium, aportando textura, identidad y acabado superior.</p>
               <p className="text-[10px] tracking-[0.15em] uppercase text-stone-500 mb-3">Talla</p>
               <div className="flex gap-2 mb-8">
-                {['S', 'M', 'L'].map(t => (
-                  <button key={t} onClick={() => setTallaSeleccionada(t)} className={`w-12 h-12 border text-sm transition-all ${tallaSeleccionada === t ? 'border-black bg-black text-white' : 'border-stone-200 hover:border-stone-400'}`}>{t}</button>
-                ))}
+                {TALLAS.map(t => {
+                  const stock = inventory[t] ?? 0;
+                  const agotado = stock === 0;
+                  return (
+                    <button key={t} onClick={() => !agotado && setTallaSeleccionada(t)}
+                      disabled={agotado}
+                      className={`w-12 h-12 border text-sm transition-all relative ${
+                        agotado ? 'border-stone-100 text-stone-300 cursor-not-allowed' :
+                        tallaSeleccionada === t ? 'border-black bg-black text-white' :
+                        'border-stone-200 hover:border-stone-400'
+                      }`}>
+                      {t}
+                      {agotado && <span className="absolute inset-0 flex items-center justify-center"><span className="block w-8 h-px bg-stone-300 rotate-45" /></span>}
+                    </button>
+                  );
+                })}
               </div>
-              <button onClick={agregarCarrito} className={`w-full py-4 text-xs tracking-[0.2em] uppercase transition-all mb-3 ${agregado ? 'bg-stone-700 text-white' : 'bg-black text-white hover:bg-stone-800'}`}>
-                {agregado ? '✓ Añadido al carrito' : 'Añadir al carrito'}
+              {tallaSeleccionada && inventory[tallaSeleccionada] <= 2 && inventory[tallaSeleccionada] > 0 && (
+                <p className="text-[11px] text-amber-600 mb-4">Solo quedan {inventory[tallaSeleccionada]} piezas</p>
+              )}
+              <button onClick={agregarCarrito} disabled={!tallaSeleccionada || stockTalla === 0}
+                className={`w-full py-4 text-xs tracking-[0.2em] uppercase transition-all mb-3 ${
+                  agregado ? 'bg-stone-700 text-white' :
+                  !tallaSeleccionada || stockTalla === 0 ? 'bg-stone-100 text-stone-400 cursor-not-allowed' :
+                  'bg-black text-white hover:bg-stone-800'
+                }`}>
+                {agregado ? '✓ Añadido al carrito' : stockTalla === 0 && tallaSeleccionada ? 'Agotado' : 'Añadir al carrito'}
               </button>
               <Link href="/cart" className="block w-full py-4 border border-black text-center text-xs tracking-[0.2em] uppercase hover:bg-black hover:text-white transition-all">Ver carrito</Link>
               <div className="border-t border-stone-100 mt-8 pt-6 space-y-2">
