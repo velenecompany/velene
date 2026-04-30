@@ -7,11 +7,11 @@ export default function ContactoPage() {
   const [form, setForm] = useState({ name: '', email: '', asunto: '', mensaje: '' });
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
-  };
+  }
 
-  const handleSubmit = async (e: React.MouseEvent) => {
+  async function handleSubmit(e: React.MouseEvent) {
     e.preventDefault();
     setStatus('loading');
     try {
@@ -24,7 +24,7 @@ export default function ContactoPage() {
     } catch {
       setStatus('error');
     }
-  };
+  }
 
   if (status === 'success') {
     return (
@@ -47,37 +47,30 @@ export default function ContactoPage() {
       <Navbar />
       <main className="pt-32 pb-24 min-h-screen bg-[#FAFAF8]">
         <div className="max-w-screen-xl mx-auto px-6">
-
-          {/* Header */}
           <div className="mb-16">
-            <p className="text-[10px] tracking-[0.4em] uppercase text-stone-400 mb-4">VELENÉ</p>
-            <h1 className="font-display text-5xl font-light mb-6">Contáctanos</h1>
+            <p className="text-[10px] tracking-[0.4em] uppercase text-stone-400 mb-4">VELENE</p>
+            <h1 className="font-display text-5xl font-light mb-6">Contactanos</h1>
             <p className="text-sm text-stone-500 leading-loose max-w-md">Para dudas sobre pedidos, tallas, colaboraciones o cualquier otra consulta. Respondemos en menos de 24 horas.</p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-16">
-
-            {/* Info */}
             <div className="space-y-10">
-
               <div>
                 <p className="text-[10px] tracking-[0.3em] uppercase text-stone-400 mb-4">Email</p>
                 <a href="mailto:velacontacto2@gmail.com" className="text-sm text-stone-700 hover:text-stone-900 transition-colors border-b border-stone-300 pb-px">
                   velacontacto2@gmail.com
                 </a>
               </div>
-
               <div>
-                <p className="text-[10px] tracking-[0.3em] uppercase text-stone-400 mb-4">Teléfono</p>
+                <p className="text-[10px] tracking-[0.3em] uppercase text-stone-400 mb-4">Telefono</p>
                 <a href="tel:+523324261099" className="text-sm text-stone-700 hover:text-stone-900 transition-colors">
                   +52 33 2426 1099
                 </a>
               </div>
-
               <div>
                 <p className="text-[10px] tracking-[0.3em] uppercase text-stone-400 mb-4">WhatsApp</p>
                 
-                  href="https://wa.me/523324261099?text=Hola%20VELEN%C3%89%2C%20tengo%20una%20consulta"
+                  href="https://wa.me/523324261099?text=Hola%20VELENE%2C%20tengo%20una%20consulta"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-3 border border-stone-300 px-6 py-3 text-xs tracking-[0.2em] uppercase text-stone-700 hover:bg-stone-900 hover:text-white hover:border-stone-900 transition-all">
@@ -87,13 +80,11 @@ export default function ContactoPage() {
                   Escribir por WhatsApp
                 </a>
               </div>
-
               <div>
-                <p className="text-[10px] tracking-[0.3em] uppercase text-stone-400 mb-4">Horario de atención</p>
+                <p className="text-[10px] tracking-[0.3em] uppercase text-stone-400 mb-4">Horario de atencion</p>
                 <p className="text-sm text-stone-600">Lunes a Viernes — 9:00 a 18:00 hrs</p>
-                <p className="text-sm text-stone-500">Guadalajara, México (CST)</p>
+                <p className="text-sm text-stone-500">Guadalajara, Mexico (CST)</p>
               </div>
-
               <div>
                 <p className="text-[10px] tracking-[0.3em] uppercase text-stone-400 mb-4">Redes sociales</p>
                 <div className="flex gap-5">
@@ -109,10 +100,8 @@ export default function ContactoPage() {
                   </a>
                 </div>
               </div>
-
             </div>
 
-            {/* Formulario */}
             <div className="space-y-6">
               <div>
                 <label className="block text-[10px] tracking-[0.3em] uppercase text-stone-400 mb-3">Nombre</label>
@@ -120,44 +109,38 @@ export default function ContactoPage() {
                   className="w-full bg-transparent border-b border-stone-300 pb-3 text-sm text-stone-900 placeholder-stone-300 focus:outline-none focus:border-stone-600 transition-colors"
                   placeholder="Tu nombre" />
               </div>
-
               <div>
                 <label className="block text-[10px] tracking-[0.3em] uppercase text-stone-400 mb-3">Email</label>
                 <input name="email" type="email" value={form.email} onChange={handleChange}
                   className="w-full bg-transparent border-b border-stone-300 pb-3 text-sm text-stone-900 placeholder-stone-300 focus:outline-none focus:border-stone-600 transition-colors"
                   placeholder="tu@email.com" />
               </div>
-
               <div>
                 <label className="block text-[10px] tracking-[0.3em] uppercase text-stone-400 mb-3">Asunto</label>
                 <select name="asunto" value={form.asunto} onChange={handleChange}
                   className="w-full bg-[#FAFAF8] border-b border-stone-300 pb-3 text-sm text-stone-900 focus:outline-none focus:border-stone-600 transition-colors">
                   <option value="">Selecciona un asunto</option>
                   <option value="pedido">Duda sobre mi pedido</option>
-                  <option value="talla">Guía de tallas</option>
-                  <option value="colaboracion">Colaboración</option>
+                  <option value="talla">Guia de tallas</option>
+                  <option value="colaboracion">Colaboracion</option>
                   <option value="mayoreo">Mayoreo / Partners</option>
                   <option value="otro">Otro</option>
                 </select>
               </div>
-
               <div>
                 <label className="block text-[10px] tracking-[0.3em] uppercase text-stone-400 mb-3">Mensaje</label>
                 <textarea name="mensaje" value={form.mensaje} onChange={handleChange} rows={5}
                   className="w-full bg-transparent border-b border-stone-300 pb-3 text-sm text-stone-900 placeholder-stone-300 focus:outline-none focus:border-stone-600 transition-colors resize-none"
-                  placeholder="¿En qué podemos ayudarte?" />
+                  placeholder="En que podemos ayudarte?" />
               </div>
-
               {status === 'error' && (
-                <p className="text-red-400 text-xs tracking-widest uppercase">Ocurrió un error. Intenta de nuevo.</p>
+                <p className="text-red-400 text-xs tracking-widest uppercase">Ocurrio un error. Intenta de nuevo.</p>
               )}
-
               <button onClick={handleSubmit} disabled={status === 'loading'}
                 className="w-full bg-stone-900 text-white text-xs tracking-[0.3em] uppercase py-4 hover:bg-stone-700 transition-colors disabled:opacity-40">
                 {status === 'loading' ? 'Enviando...' : 'Enviar Mensaje'}
               </button>
             </div>
-
           </div>
         </div>
       </main>
