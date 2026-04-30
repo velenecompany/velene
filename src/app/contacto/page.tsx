@@ -7,11 +7,11 @@ export default function ContactoPage() {
   const [form, setForm] = useState({ name: '', email: '', asunto: '', mensaje: '' });
   const [status, setStatus] = useState('idle');
 
-  function handleChange(e) {
+  function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
-  async function handleSubmit(e) {
+  async function handleSubmit(e: React.MouseEvent) {
     e.preventDefault();
     setStatus('loading');
     try {
