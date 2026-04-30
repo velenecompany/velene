@@ -115,7 +115,7 @@ export default function DropsPage() {
           <>
             <section className="max-w-screen-xl mx-auto px-6 pb-8">
               <p className="text-[10px] tracking-[0.25em] uppercase text-stone-400 mb-6">Sets</p>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-stone-200">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {SETS.map(p => (
                   <div key={p.slug} className="bg-[#FAFAF8]">
                     <Link href={`/shop/${p.slug}`} className="group block">
@@ -146,7 +146,7 @@ export default function DropsPage() {
 
             <section className="max-w-screen-xl mx-auto px-6 pb-24 mt-12">
               <p className="text-[10px] tracking-[0.25em] uppercase text-stone-400 mb-6">T-Shirts</p>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-stone-200">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {TSHIRTS.map(p => (
                   <div key={p.slug} className="bg-[#FAFAF8]">
                     <Link href={`/shop/${p.slug}`} className="group block">
