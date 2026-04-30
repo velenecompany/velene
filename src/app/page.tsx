@@ -38,7 +38,7 @@ export default function HomePage() {
               {[
                 { img: '/PORTADA-OF.jpg', name: 'Set Conclave Rosa', price: 899, tag: 'Nuevo', slug: 'set-conclave-rosa' },
                 { img: '/IMG_9367.jpg', name: 'Set Conclave Beige', price: 899, tag: 'Nuevo', slug: 'set-conclave-beige' },
-                { img: '/IMG_9368.jpg', name: 'Set Conclave Azul', price: 599, comparePrice: 899, tag: 'Oferta', slug: 'set-conclave-azul' },
+                { img: '/IMG_9377.jpg', name: 'Set Conclave Azul', price: 599, comparePrice: 899, tag: 'Oferta', slug: 'set-conclave-azul' },
               ].map((p, i) => (
                 <Link key={i} href={`/shop/${p.slug}`} className="group bg-white block relative">
                   <div className="aspect-[3/4] overflow-hidden relative">
