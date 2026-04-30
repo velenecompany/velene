@@ -5,15 +5,15 @@ import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 
 const SETS = [
-  { img: '/PORTADA-OF.jpg', color: 'Rosa', slug: 'set-conclave-rosa', precio: 899 },
-  { img: '/IMG_9367.jpg', color: 'Beige', slug: 'set-conclave-beige', precio: 899 },
-  { img: '/IMG_9377.jpg', color: 'Azul', slug: 'set-conclave-azul', precio: 599 },
+  { img: '/PORTADA-OF.jpg', hover: '/IMG_9077.jpg', color: 'Rosa', slug: 'set-conclave-rosa', precio: 899 },
+  { img: '/IMG_9367.jpg', hover: '/IMG_9083.jpg', color: 'Beige', slug: 'set-conclave-beige', precio: 899 },
+  { img: '/IMG_9377.jpg', hover: '/IMG_9370.jpg', color: 'Azul', slug: 'set-conclave-azul', precio: 599 },
 ];
 
 const TSHIRTS = [
-  { img: '/IMG_9077.jpg', color: 'Rosa', slug: 'playera-conclave-rosa', precio: 599 },
-  { img: '/IMG_9367.jpg', color: 'Beige', slug: 'playera-conclave-beige', precio: 599 },
-  { img: '/IMG_9368.jpg', color: 'Azul', slug: 'playera-conclave-azul', precio: 599 },
+  { img: '/IMG_9077.jpg', hover: '/IMG_9375.jpg', color: 'Rosa', slug: 'playera-conclave-rosa', precio: 599 },
+  { img: '/IMG_9367.jpg', hover: '/IMG_9083.jpg', color: 'Beige', slug: 'playera-conclave-beige', precio: 599 },
+  { img: '/IMG_9368.jpg', hover: '/IMG_9370.jpg', color: 'Azul', slug: 'playera-conclave-azul', precio: 599 },
 ];
 
 function getDiscount(tier: string | null): number {
@@ -35,18 +35,13 @@ export default function DropsPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Verificar tier del usuario
     const token = localStorage.getItem('token');
     if (token) {
-      fetch('/api/auth/me', {
-        headers: { Authorization: `Bearer ${token}` }
-      })
+      fetch('/api/auth/me', { headers: { Authorization: `Bearer ${token}` } })
         .then(r => r.json())
         .then(data => { if (data.membership_tier) setTier(data.membership_tier); })
         .catch(() => {});
     }
-
-    // Consultar estado del drop
     fetch('/api/drops?slug=the-conclave')
       .then(r => r.json())
       .then(data => { setDrop(data); setLoading(false); })
@@ -94,7 +89,6 @@ export default function DropsPage() {
           <p className="text-[10px] tracking-[0.3em] uppercase text-stone-400 mb-6">Colección activa</p>
           <h1 className="font-display text-7xl md:text-9xl font-light tracking-tight text-stone-900 leading-none mb-4">The Conclave</h1>
           <p className="text-[11px] tracking-[0.2em] uppercase text-stone-400 mt-6">GDL — 2025 — Edición limitada</p>
-
           {mensajeEarly && (
             <div className="mt-8 inline-block border border-stone-900 px-6 py-3">
               <p className="text-[11px] tracking-[0.2em] uppercase text-stone-900">✦ {mensajeEarly}</p>
@@ -125,8 +119,9 @@ export default function DropsPage() {
                 {SETS.map(p => (
                   <div key={p.slug} className="bg-[#FAFAF8] group">
                     <Link href={`/shop/${p.slug}`}>
-                      <div className="aspect-[3/4] overflow-hidden bg-stone-100">
-                        <img src={p.img} alt={p.color} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                      <div className="aspect-[3/4] overflow-hidden bg-stone-100 relative">
+                        <img src={p.img} alt={p.color} className="w-full h-full object-cover transition-all duration-500 group-hover:opacity-0" />
+                        <img src={p.hover} alt={`${p.color} hover`} className="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                       </div>
                     </Link>
                     <div className="p-6">
@@ -155,8 +150,9 @@ export default function DropsPage() {
                 {TSHIRTS.map(p => (
                   <div key={p.slug} className="bg-[#FAFAF8] group">
                     <Link href={`/shop/${p.slug}`}>
-                      <div className="aspect-[3/4] overflow-hidden bg-stone-100">
-                        <img src={p.img} alt={p.color} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                      <div className="aspect-[3/4] overflow-hidden bg-stone-100 relative">
+                        <img src={p.img} alt={p.color} className="w-full h-full object-cover transition-all duration-500 group-hover:opacity-0" />
+                        <img src={p.hover} alt={`${p.color} hover`} className="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                       </div>
                     </Link>
                     <div className="p-6">
