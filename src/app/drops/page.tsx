@@ -7,7 +7,7 @@ import Footer from '@/components/layout/Footer';
 const SETS = [
   { img: '/PORTADA-OF.jpg', color: 'Rosa', slug: 'set-conclave-rosa', precio: 899 },
   { img: '/IMG_9367.jpg', color: 'Beige', slug: 'set-conclave-beige', precio: 899 },
-  { img: '/IMG_9368.jpg', color: 'Azul', slug: 'set-conclave-azul', precio: 599 },
+  { img: '/IMG_9377.jpg', color: 'Azul', slug: 'set-conclave-azul', precio: 599 },
 ];
 
 const TSHIRTS = [
