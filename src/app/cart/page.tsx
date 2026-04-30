@@ -25,7 +25,7 @@ export default function CartPage() {
         <main className="pt-16 min-h-screen flex items-center justify-center">
           <div className="text-center">
             <p className="font-display text-3xl font-light text-stone-300 mb-6">Tu carrito está vacío</p>
-            <Link href="/shop" className="text-[11px] tracking-[0.2em] uppercase border-b border-stone-900 pb-px">Ir a la tienda</Link>
+            <Link href="/" className="text-[11px] tracking-[0.2em] uppercase border-b border-stone-900 pb-px">Ir al inicio</Link>
           </div>
         </main>
         <Footer />
