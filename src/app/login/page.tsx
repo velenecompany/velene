@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Navbar from '@/components/layout/Navbar';
 
 export default function LoginPage() {
-  const [mode, setMode] = useState<'login' | 'register'>('login');
+  const [mode, setMode] = useState<'login' | 'register'>('register');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
