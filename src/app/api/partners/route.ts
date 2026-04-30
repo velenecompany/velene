@@ -2,9 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { Pool } from 'pg';
 import { sendPartnerConfirmation, sendPartnerNotification } from '@/lib/emails';
 
-const pool = new Pool({ connectionString: process.env.DATABASE_URL });
-
 export async function POST(req: NextRequest) {
+  const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+
   try {
     const body = await req.json();
     const {
@@ -53,5 +53,7 @@ export async function POST(req: NextRequest) {
   } catch (err: any) {
     console.error('Partners API error:', err);
     return NextResponse.json({ error: 'Error interno' }, { status: 500 });
+  } finally {
+    await pool.end();
   }
 }
