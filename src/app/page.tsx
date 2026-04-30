@@ -105,7 +105,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="py-24 bg-[#0A0A0A] text-white">
+        <section className="py-24 bg-[#3D3935] text-white">
           <div className="max-w-screen-xl mx-auto px-6 text-center">
             <p className="text-[10px] tracking-[0.3em] uppercase text-white/40 mb-6">The Conclave · Drop 001</p>
             <h2 className="font-display text-5xl md:text-7xl font-light mb-8">Luxury in Defiance.</h2>
@@ -114,7 +114,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="py-24 bg-[#0A0A0A] text-white border-t border-white/10">
+        <section className="py-24 bg-[#3D3935] text-white border-t border-white/10">
           <div className="max-w-screen-xl mx-auto px-6 text-center">
             <p className="text-[10px] tracking-[0.3em] uppercase text-white/40 mb-6">Distribución Autorizada</p>
             <h2 className="font-display text-5xl md:text-7xl font-light mb-8">Conviértete en<br />Partner Autorizado.</h2>
