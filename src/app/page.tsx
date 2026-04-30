@@ -35,26 +35,56 @@ export default function HomePage() {
               </div>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-stone-200">
-              {[
-                { img: '/PORTADA-OF.jpg', name: 'Set Conclave Rosa', price: 899, tag: 'Nuevo', slug: 'set-conclave-rosa' },
-                { img: '/IMG_9367.jpg', name: 'Set Conclave Beige', price: 899, tag: 'Nuevo', slug: 'set-conclave-beige' },
-                { img: '/IMG_9377.jpg', name: 'Set Conclave Azul', price: 599, comparePrice: 899, tag: 'Oferta', slug: 'set-conclave-azul' },
-              ].map((p, i) => (
-                <Link key={i} href={`/shop/${p.slug}`} className="group bg-white block relative">
-                  <div className="aspect-[3/4] overflow-hidden relative">
-                    {p.tag && <span className="absolute top-3 left-3 z-10 bg-black text-white text-[9px] tracking-[0.15em] uppercase px-2.5 py-1">{p.tag}</span>}
-                    <img src={p.img} alt={p.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+
+              {/* Set Rosa */}
+              <Link href="/shop/set-conclave-rosa" className="group bg-white block relative">
+                <div className="aspect-[3/4] overflow-hidden relative">
+                  <span className="absolute top-3 left-3 z-10 bg-black text-white text-[9px] tracking-[0.15em] uppercase px-2.5 py-1">Nuevo</span>
+                  <img src="/PORTADA-OF.jpg" alt="Set Conclave Rosa" className="w-full h-full object-cover transition-all duration-500 group-hover:opacity-0" />
+                  <img src="/muckup rosa detras.jpg" alt="Set Conclave Rosa hover" className="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                </div>
+                <div className="p-4">
+                  <p className="text-sm mb-2">Set Conclave Rosa</p>
+                  <div className="flex items-center gap-2">
+                    <p className="font-display text-lg">$899</p>
                   </div>
-                  <div className="p-4">
-                    <p className="text-sm mb-2">{p.name}</p>
-                    <div className="flex items-center gap-2">
-                      <p className="font-display text-lg">${p.price.toLocaleString('es-MX')}</p>
-                      {p.comparePrice && <p className="text-sm text-stone-400 line-through">${p.comparePrice.toLocaleString('es-MX')}</p>}
-                    </div>
-                    <p className="text-[10px] text-emerald-600 mt-1">✓ Envío gratis</p>
+                  <p className="text-[10px] text-emerald-600 mt-1">✓ Envío gratis</p>
+                </div>
+              </Link>
+
+              {/* Set Beige */}
+              <Link href="/shop/set-conclave-beige" className="group bg-white block relative">
+                <div className="aspect-[3/4] overflow-hidden relative">
+                  <span className="absolute top-3 left-3 z-10 bg-black text-white text-[9px] tracking-[0.15em] uppercase px-2.5 py-1">Nuevo</span>
+                  <img src="/IMG_9367.jpg" alt="Set Conclave Beige" className="w-full h-full object-cover transition-all duration-500 group-hover:opacity-0" />
+                  <img src="/mockup-beige-completo.jpg" alt="Set Conclave Beige hover" className="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                </div>
+                <div className="p-4">
+                  <p className="text-sm mb-2">Set Conclave Beige</p>
+                  <div className="flex items-center gap-2">
+                    <p className="font-display text-lg">$899</p>
                   </div>
-                </Link>
-              ))}
+                  <p className="text-[10px] text-emerald-600 mt-1">✓ Envío gratis</p>
+                </div>
+              </Link>
+
+              {/* Set Azul */}
+              <Link href="/shop/set-conclave-azul" className="group bg-white block relative">
+                <div className="aspect-[3/4] overflow-hidden relative">
+                  <span className="absolute top-3 left-3 z-10 bg-black text-white text-[9px] tracking-[0.15em] uppercase px-2.5 py-1">Oferta</span>
+                  <img src="/IMG_9377.jpg" alt="Set Conclave Azul" className="w-full h-full object-cover transition-all duration-500 group-hover:opacity-0" />
+                  <img src="/muckup azul completo.jpg" alt="Set Conclave Azul hover" className="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                </div>
+                <div className="p-4">
+                  <p className="text-sm mb-2">Set Conclave Azul</p>
+                  <div className="flex items-center gap-2">
+                    <p className="font-display text-lg">$599</p>
+                    <p className="text-sm text-stone-400 line-through">$899</p>
+                  </div>
+                  <p className="text-[10px] text-emerald-600 mt-1">✓ Envío gratis</p>
+                </div>
+              </Link>
+
             </div>
           </div>
         </section>
