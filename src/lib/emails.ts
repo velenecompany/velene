@@ -42,19 +42,13 @@ export async function sendOrderConfirmation({
         <table width="100%" cellpadding="0" cellspacing="0">
           <tr><td align="center" style="padding:40px 20px">
             <table width="560" cellpadding="0" cellspacing="0" style="max-width:560px;width:100%">
-
-              <!-- Header -->
               <tr><td style="padding:40px 0 32px;border-bottom:1px solid #1a1a1a">
                 <p style="margin:0;font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:#444">VELENÉ</p>
               </td></tr>
-
-              <!-- Body -->
               <tr><td style="padding:40px 0">
                 <p style="margin:0 0 8px;font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:#444">Pedido Confirmado</p>
                 <h1 style="margin:0 0 32px;font-size:28px;font-weight:300;color:#fff;letter-spacing:0.05em">Gracias, ${firstName}.</h1>
                 <p style="margin:0 0 32px;font-size:13px;color:#666;line-height:1.8">Tu pedido <span style="color:#fff">#${orderNumber}</span> está confirmado. En cuanto sea enviado te avisamos con el número de rastreo.</p>
-
-                <!-- Items -->
                 <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px">
                   <tr>
                     <td style="font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:#444;padding-bottom:12px">Producto</td>
@@ -67,8 +61,6 @@ export async function sendOrderConfirmation({
                     <td style="padding-top:16px;font-size:16px;color:#fff;text-align:right">$${total.toLocaleString('es-MX')} MXN</td>
                   </tr>
                 </table>
-
-                <!-- Dirección -->
                 <div style="border:1px solid #1a1a1a;padding:20px;margin-top:32px">
                   <p style="margin:0 0 12px;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:#444">Dirección de Envío</p>
                   <p style="margin:0;font-size:13px;color:#666;line-height:1.8">
@@ -79,12 +71,9 @@ export async function sendOrderConfirmation({
                   </p>
                 </div>
               </td></tr>
-
-              <!-- Footer -->
               <tr><td style="padding:32px 0;border-top:1px solid #1a1a1a">
                 <p style="margin:0;font-size:11px;color:#333;text-align:center;letter-spacing:0.1em">VELENÉ · Guadalajara, México</p>
               </td></tr>
-
             </table>
           </td></tr>
         </table>
@@ -121,7 +110,6 @@ export async function sendOrderNotification({
         <p style="color:#666;font-size:13px">Cliente: <span style="color:#fff">${email}</span></p>
         <pre style="color:#999;font-size:13px;line-height:1.8;background:#111;padding:20px;margin:24px 0">${itemsList}</pre>
         <p style="font-size:16px;color:#fff">Total: $${total.toLocaleString('es-MX')} MXN</p>
-        <p style="margin-top:32px"><a href="https://velene.vercel.app/admin" style="color:#666;font-size:11px;letter-spacing:0.2em;text-transform:uppercase">Ver en dashboard</a></p>
       </body>
       </html>
     `,
@@ -150,11 +138,9 @@ export async function sendPartnerConfirmation({
         <table width="100%" cellpadding="0" cellspacing="0">
           <tr><td align="center" style="padding:40px 20px">
             <table width="560" cellpadding="0" cellspacing="0" style="max-width:560px;width:100%">
-
               <tr><td style="padding:40px 0 32px;border-bottom:1px solid #1a1a1a">
                 <p style="margin:0;font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:#444">VELENÉ</p>
               </td></tr>
-
               <tr><td style="padding:40px 0">
                 <p style="margin:0 0 8px;font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:#444">Aplicación Recibida</p>
                 <h1 style="margin:0 0 32px;font-size:28px;font-weight:300;color:#fff;letter-spacing:0.05em">Gracias, ${contactName}.</h1>
@@ -170,11 +156,9 @@ export async function sendPartnerConfirmation({
                   </p>
                 </div>
               </td></tr>
-
               <tr><td style="padding:32px 0;border-top:1px solid #1a1a1a">
                 <p style="margin:0;font-size:11px;color:#333;text-align:center;letter-spacing:0.1em">VELENÉ · Guadalajara, México</p>
               </td></tr>
-
             </table>
           </td></tr>
         </table>
@@ -192,6 +176,10 @@ export async function sendPartnerNotification({
   phone,
   volumeRange,
   businessType,
+  cityState,
+  instagramWebsite,
+  customerType,
+  message,
 }: {
   contactName: string;
   companyName: string;
@@ -199,6 +187,10 @@ export async function sendPartnerNotification({
   phone: string;
   volumeRange: string;
   businessType: string;
+  cityState?: string;
+  instagramWebsite?: string;
+  customerType?: string;
+  message?: string;
 }) {
   await resend.emails.send({
     from: FROM,
@@ -210,12 +202,16 @@ export async function sendPartnerNotification({
       <body style="margin:0;padding:40px;background:#0a0a0a;font-family:Georgia,serif;color:#fff">
         <p style="font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:#444">VELENÉ — Nueva Aplicación Partner</p>
         <h1 style="font-size:24px;font-weight:300;margin:16px 0">${companyName}</h1>
-        <table style="width:100%;margin-top:24px">
-          <tr><td style="color:#444;font-size:12px;padding:8px 0;border-bottom:1px solid #1a1a1a">Contacto</td><td style="color:#fff;font-size:13px;padding:8px 0;border-bottom:1px solid #1a1a1a">${contactName}</td></tr>
-          <tr><td style="color:#444;font-size:12px;padding:8px 0;border-bottom:1px solid #1a1a1a">Email</td><td style="color:#fff;font-size:13px;padding:8px 0;border-bottom:1px solid #1a1a1a">${email}</td></tr>
-          <tr><td style="color:#444;font-size:12px;padding:8px 0;border-bottom:1px solid #1a1a1a">Teléfono</td><td style="color:#fff;font-size:13px;padding:8px 0;border-bottom:1px solid #1a1a1a">${phone}</td></tr>
-          <tr><td style="color:#444;font-size:12px;padding:8px 0;border-bottom:1px solid #1a1a1a">Tipo</td><td style="color:#fff;font-size:13px;padding:8px 0;border-bottom:1px solid #1a1a1a">${businessType}</td></tr>
-          <tr><td style="color:#444;font-size:12px;padding:8px 0">Volumen</td><td style="color:#fff;font-size:13px;padding:8px 0">${volumeRange}</td></tr>
+        <table style="width:100%;margin-top:24px;border-collapse:collapse">
+          <tr><td style="color:#444;font-size:12px;padding:10px 0;border-bottom:1px solid #1a1a1a;width:140px">Contacto</td><td style="color:#fff;font-size:13px;padding:10px 0;border-bottom:1px solid #1a1a1a">${contactName}</td></tr>
+          <tr><td style="color:#444;font-size:12px;padding:10px 0;border-bottom:1px solid #1a1a1a">Email</td><td style="color:#fff;font-size:13px;padding:10px 0;border-bottom:1px solid #1a1a1a">${email}</td></tr>
+          <tr><td style="color:#444;font-size:12px;padding:10px 0;border-bottom:1px solid #1a1a1a">Teléfono</td><td style="color:#fff;font-size:13px;padding:10px 0;border-bottom:1px solid #1a1a1a">${phone}</td></tr>
+          <tr><td style="color:#444;font-size:12px;padding:10px 0;border-bottom:1px solid #1a1a1a">Tipo de tienda</td><td style="color:#fff;font-size:13px;padding:10px 0;border-bottom:1px solid #1a1a1a">${businessType}</td></tr>
+          <tr><td style="color:#444;font-size:12px;padding:10px 0;border-bottom:1px solid #1a1a1a">Volumen</td><td style="color:#fff;font-size:13px;padding:10px 0;border-bottom:1px solid #1a1a1a">${volumeRange}</td></tr>
+          <tr><td style="color:#444;font-size:12px;padding:10px 0;border-bottom:1px solid #1a1a1a">Ciudad</td><td style="color:#fff;font-size:13px;padding:10px 0;border-bottom:1px solid #1a1a1a">${cityState || 'No proporcionado'}</td></tr>
+          <tr><td style="color:#444;font-size:12px;padding:10px 0;border-bottom:1px solid #1a1a1a">Instagram / Web</td><td style="color:#fff;font-size:13px;padding:10px 0;border-bottom:1px solid #1a1a1a">${instagramWebsite || 'No proporcionado'}</td></tr>
+          <tr><td style="color:#444;font-size:12px;padding:10px 0;border-bottom:1px solid #1a1a1a">Tipo de cliente</td><td style="color:#fff;font-size:13px;padding:10px 0;border-bottom:1px solid #1a1a1a">${customerType || 'No proporcionado'}</td></tr>
+          <tr><td style="color:#444;font-size:12px;padding:10px 0">Mensaje</td><td style="color:#fff;font-size:13px;padding:10px 0">${message || 'Sin mensaje'}</td></tr>
         </table>
       </body>
       </html>
