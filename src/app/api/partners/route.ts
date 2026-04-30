@@ -46,6 +46,10 @@ export async function POST(req: NextRequest) {
         phone: phone || 'No proporcionado',
         volumeRange: volume_range,
         businessType: business_type || 'No especificado',
+        cityState: city_state || 'No proporcionado',
+        instagramWebsite: instagram_website || 'No proporcionado',
+        customerType: customer_type || 'No proporcionado',
+        message: message || 'Sin mensaje',
       }),
     ]);
 
