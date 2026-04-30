@@ -117,8 +117,8 @@ export default function DropsPage() {
               <p className="text-[10px] tracking-[0.25em] uppercase text-stone-400 mb-6">Sets</p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-stone-200">
                 {SETS.map(p => (
-                  <div key={p.slug} className="bg-[#FAFAF8] group">
-                    <Link href={`/shop/${p.slug}`}>
+                  <div key={p.slug} className="bg-[#FAFAF8]">
+                    <Link href={`/shop/${p.slug}`} className="group block">
                       <div className="aspect-[3/4] overflow-hidden bg-stone-100 relative">
                         <img src={p.img} alt={p.color} className="w-full h-full object-cover transition-all duration-500 group-hover:opacity-0" />
                         <img src={p.hover} alt={`${p.color} hover`} className="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -148,8 +148,8 @@ export default function DropsPage() {
               <p className="text-[10px] tracking-[0.25em] uppercase text-stone-400 mb-6">T-Shirts</p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-stone-200">
                 {TSHIRTS.map(p => (
-                  <div key={p.slug} className="bg-[#FAFAF8] group">
-                    <Link href={`/shop/${p.slug}`}>
+                  <div key={p.slug} className="bg-[#FAFAF8]">
+                    <Link href={`/shop/${p.slug}`} className="group block">
                       <div className="aspect-[3/4] overflow-hidden bg-stone-100 relative">
                         <img src={p.img} alt={p.color} className="w-full h-full object-cover transition-all duration-500 group-hover:opacity-0" />
                         <img src={p.hover} alt={`${p.color} hover`} className="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
