@@ -34,7 +34,7 @@ export default function HomePage() {
                 <p className="font-display text-4xl font-light">The Conclave</p>
               </div>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-stone-200">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
 
               {/* Set Rosa */}
               <Link href="/shop/set-conclave-rosa" className="group bg-white block relative">
