@@ -66,7 +66,7 @@ export default function PlayeraAzul() {
                     <button key={t} onClick={() => !agotado && setTallaSeleccionada(t)}
                       disabled={agotado}
                       className={`w-12 h-12 border text-sm transition-all relative ${
-                        agotado ? 'border-stone-100 text-stone-300 cursor-not-allowed' :
+                        agotado ? 'border-stone-100 text-stone-300 cursor-not-avut' :
                         tallaSeleccionada === t ? 'border-black bg-black text-white' :
                         'border-stone-200 hover:border-stone-400'
                       }`}>
