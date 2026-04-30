@@ -41,7 +41,7 @@ export default function HomePage() {
                 <div className="aspect-[3/4] overflow-hidden relative">
                   <span className="absolute top-3 left-3 z-10 bg-black text-white text-[9px] tracking-[0.15em] uppercase px-2.5 py-1">Nuevo</span>
                   <img src="/PORTADA-OF.jpg" alt="Set Conclave Rosa" className="w-full h-full object-cover transition-all duration-500 group-hover:opacity-0" />
-                  <img src="/muckup rosa detras.jpg" alt="Set Conclave Rosa hover" className="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <img src="/IMG_9077.jpg" alt="Set Conclave Rosa hover" className="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
                 <div className="p-4">
                   <p className="text-sm mb-2">Set Conclave Rosa</p>
@@ -57,7 +57,7 @@ export default function HomePage() {
                 <div className="aspect-[3/4] overflow-hidden relative">
                   <span className="absolute top-3 left-3 z-10 bg-black text-white text-[9px] tracking-[0.15em] uppercase px-2.5 py-1">Nuevo</span>
                   <img src="/IMG_9367.jpg" alt="Set Conclave Beige" className="w-full h-full object-cover transition-all duration-500 group-hover:opacity-0" />
-                  <img src="/mockup-beige-completo.jpg" alt="Set Conclave Beige hover" className="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <img src="/IMG_9083.jpg" alt="Set Conclave Beige hover" className="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
                 <div className="p-4">
                   <p className="text-sm mb-2">Set Conclave Beige</p>
@@ -73,7 +73,7 @@ export default function HomePage() {
                 <div className="aspect-[3/4] overflow-hidden relative">
                   <span className="absolute top-3 left-3 z-10 bg-black text-white text-[9px] tracking-[0.15em] uppercase px-2.5 py-1">Oferta</span>
                   <img src="/IMG_9377.jpg" alt="Set Conclave Azul" className="w-full h-full object-cover transition-all duration-500 group-hover:opacity-0" />
-                  <img src="/muckup azul completo.jpg" alt="Set Conclave Azul hover" className="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <img src="/IMG_9370.jpg" alt="Set Conclave Azul hover" className="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
                 <div className="p-4">
                   <p className="text-sm mb-2">Set Conclave Azul</p>
