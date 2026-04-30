@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import db, { withTransaction } from "@/lib/db";
+import { sendOrderConfirmation, sendOrderNotification } from "@/lib/emails";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2023-10-16' });
 
@@ -42,6 +43,8 @@ async function fulfillOrder(session: Stripe.Checkout.Session) {
     s + i.unit_price * i.quantity, 0);
 
   try {
+    let order_number: string;
+
     await withTransaction(async (client) => {
       // 1. Upsert customer
       const { rows: [customer] } = await client.query(
@@ -50,9 +53,10 @@ async function fulfillOrder(session: Stripe.Checkout.Session) {
       );
 
       // 2. Generate order number
-      const { rows: [{ order_number }] } = await client.query(
+      const { rows: [{ order_number: on }] } = await client.query(
         'SELECT generate_order_number() AS order_number'
       );
+      order_number = on;
 
       // 3. Create order
       const { rows: [order] } = await client.query(
@@ -125,6 +129,31 @@ async function fulfillOrder(session: Stripe.Checkout.Session) {
 
       console.log('[Webhook] Order ' + order_number + ' fulfilled for ' + email);
     });
+
+    // 7. Emails — fuera de la transacción para no bloquearla
+    const orderItems = items.map((i: any) => ({
+      product_name: i.nombre,
+      quantity: i.cantidad,
+      unit_price: i.precio,
+    }));
+
+    await Promise.allSettled([
+      sendOrderConfirmation({
+        to: email,
+        firstName: nombre,
+        orderNumber: order_number!,
+        items: orderItems,
+        total,
+        shippingAddress: { name: `${nombre} ${apellido}`, line1: direccion, city: ciudad, postal_code: cp, country: 'MX' },
+      }),
+      sendOrderNotification({
+        orderNumber: order_number!,
+        email,
+        items: orderItems,
+        total,
+      }),
+    ]);
+
   } catch (err) {
     console.error('[Webhook] Order fulfillment failed', err);
     throw err;

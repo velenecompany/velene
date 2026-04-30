@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Pool } from 'pg';
+import { sendPartnerConfirmation, sendPartnerNotification } from '@/lib/emails';
 
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
@@ -31,6 +32,22 @@ export async function POST(req: NextRequest) {
       [contact_name, email, phone, company_name, city_state, instagram_website,
        business_type, volume_range, customer_type, message]
     );
+
+    await Promise.allSettled([
+      sendPartnerConfirmation({
+        to: email,
+        contactName: contact_name,
+        companyName: company_name || contact_name,
+      }),
+      sendPartnerNotification({
+        contactName: contact_name,
+        companyName: company_name || 'Sin nombre',
+        email,
+        phone: phone || 'No proporcionado',
+        volumeRange: volume_range,
+        businessType: business_type || 'No especificado',
+      }),
+    ]);
 
     return NextResponse.json({ success: true }, { status: 201 });
   } catch (err: any) {
