@@ -7,6 +7,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [count, setCount] = useState(0);
+  const [earlyAccess, setEarlyAccess] = useState(false);
 
   useEffect(() => {
     setCount(cartCount());
@@ -14,6 +15,22 @@ export default function Navbar() {
     const onCart = () => setCount(cartCount());
     window.addEventListener('scroll', onScroll);
     window.addEventListener('cart-updated', onCart);
+
+    // Verificar si el usuario tiene acceso anticipado
+    const token = localStorage.getItem('token');
+    if (token) {
+      Promise.all([
+        fetch('/api/auth/me', { headers: { Authorization: `Bearer ${token}` } }).then(r => r.json()),
+        fetch('/api/drops?slug=the-conclave').then(r => r.json()),
+      ]).then(([user, drop]) => {
+        const tier = user.membership_tier;
+        if (!tier || !drop) return;
+        if (tier === 'Apex' && drop.apex_active && !drop.public_active) setEarlyAccess(true);
+        if (tier === 'Drive' && drop.drive_active && !drop.public_active) setEarlyAccess(true);
+        if (tier === 'Pace' && drop.pace_active && !drop.public_active) setEarlyAccess(true);
+      }).catch(() => {});
+    }
+
     return () => {
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('cart-updated', onCart);
@@ -25,11 +42,17 @@ export default function Navbar() {
       <nav className="max-w-screen-xl mx-auto px-6 h-16 flex items-center justify-between">
         <div className="hidden md:flex items-center gap-8">
           <Link href="/drops" className="text-[11px] tracking-[0.15em] uppercase text-stone-500 hover:text-stone-900 transition-colors">Drops</Link>
+          {earlyAccess && (
+            <Link href="/early-access" className="text-[11px] tracking-[0.15em] uppercase text-stone-900 hover:text-stone-600 transition-colors flex items-center gap-1.5">
+              <span>Early Access</span>
+              <span className="text-[9px]">✦</span>
+            </Link>
+          )}
         </div>
         <Link href="/" className="font-display text-2xl font-light tracking-[0.2em] uppercase absolute left-1/2 -translate-x-1/2">VELENÉ</Link>
         <div className="hidden md:flex items-center gap-6">
-<Link href="/about" className="text-[11px] tracking-[0.15em] uppercase text-stone-500 hover:text-stone-900 transition-colors">About</Link>
-<div className="relative group">
+          <Link href="/about" className="text-[11px] tracking-[0.15em] uppercase text-stone-500 hover:text-stone-900 transition-colors">About</Link>
+          <div className="relative group">
             <button className="text-[11px] tracking-[0.15em] uppercase text-stone-500 hover:text-stone-900 transition-colors">Account</button>
             <div className="absolute right-0 top-full pt-2 opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-200 z-50">
               <div className="bg-white border border-stone-100 shadow-lg w-72 p-6">
@@ -62,13 +85,20 @@ export default function Navbar() {
       </nav>
       {menuOpen && (
         <div className="md:hidden bg-[#FAFAF8] border-t border-[#E2DDD8] px-6 py-8">
-{['Drops', 'About', 'Account', 'Cart'].map(item => (
+          {['Drops', 'About', 'Account', 'Cart'].map(item => (
             <Link key={item} href={`/${item.toLowerCase()}`}
               className="block text-sm tracking-[0.15em] uppercase py-3 border-b border-[#E2DDD8] last:border-0"
               onClick={() => setMenuOpen(false)}>
               {item}{item === 'Cart' && count > 0 ? ` (${count})` : ''}
             </Link>
           ))}
+          {earlyAccess && (
+            <Link href="/early-access"
+              className="block text-sm tracking-[0.15em] uppercase py-3 border-b border-[#E2DDD8] text-stone-900"
+              onClick={() => setMenuOpen(false)}>
+              Early Access ✦
+            </Link>
+          )}
         </div>
       )}
     </header>
