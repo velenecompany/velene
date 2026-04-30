@@ -5,15 +5,15 @@ import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 
 const SETS = [
-  { img: '/PORTADA-OF.jpg', hover: '/IMG_9077.jpg', color: 'Rosa', slug: 'set-conclave-rosa', precio: 899 },
-  { img: '/IMG_9367.jpg', hover: '/IMG_9083.jpg', color: 'Beige', slug: 'set-conclave-beige', precio: 899 },
-  { img: '/IMG_9377.jpg', hover: '/IMG_9370.jpg', color: 'Azul', slug: 'set-conclave-azul', precio: 599 },
+  { img: '/PORTADA-OF.jpg', hover: '/IMG_9077.jpg', color: 'Rosa', slug: 'set-conclave-rosa', precio: 899, tag: 'Nuevo', tagStyle: {background:'#0A0A0A', color:'#F5F2ED'} },
+  { img: '/IMG_9367.jpg', hover: '/IMG_9083.jpg', color: 'Beige', slug: 'set-conclave-beige', precio: 899, tag: 'Nuevo', tagStyle: {background:'#0A0A0A', color:'#F5F2ED'} },
+  { img: '/IMG_9377.jpg', hover: '/IMG_9370.jpg', color: 'Azul', slug: 'set-conclave-azul', precio: 599, tag: 'Oferta', tagStyle: {background:'#8FA3B1', color:'#1a2530'} },
 ];
 
 const TSHIRTS = [
-  { img: '/IMG_9077.jpg', hover: '/IMG_9371.jpg', color: 'Rosa', slug: 'playera-conclave-rosa', precio: 599 },
-  { img: '/IMG_9367.jpg', hover: '/IMG_9083.jpg', color: 'Beige', slug: 'playera-conclave-beige', precio: 599 },
-  { img: '/IMG_9368.jpg', hover: '/IMG_9370.jpg', color: 'Azul', slug: 'playera-conclave-azul', precio: 599 },
+  { img: '/IMG_9077.jpg', hover: '/IMG_9371.jpg', color: 'Rosa', slug: 'playera-conclave-rosa', precio: 599, tag: 'Nuevo', tagStyle: {background:'#0A0A0A', color:'#F5F2ED'} },
+  { img: '/IMG_9367.jpg', hover: '/IMG_9083.jpg', color: 'Beige', slug: 'playera-conclave-beige', precio: 599, tag: 'Nuevo', tagStyle: {background:'#0A0A0A', color:'#F5F2ED'} },
+  { img: '/IMG_9368.jpg', hover: '/IMG_9370.jpg', color: 'Azul', slug: 'playera-conclave-azul', precio: 599, tag: 'Nuevo', tagStyle: {background:'#0A0A0A', color:'#F5F2ED'} },
 ];
 
 function getDiscount(tier: string | null): number {
@@ -69,18 +69,6 @@ export default function DropsPage() {
   const acceso = tieneAcceso();
   const mensajeEarly = mensajeAccesoAnticipado();
 
-  if (loading) {
-    return (
-      <>
-        <Navbar />
-        <main className="pt-16 bg-[#FAFAF8] min-h-screen flex items-center justify-center">
-          <p className="text-xs tracking-widest uppercase text-stone-400">Cargando...</p>
-        </main>
-        <Footer />
-      </>
-    );
-  }
-
   return (
     <>
       <Navbar />
@@ -120,6 +108,7 @@ export default function DropsPage() {
                   <div key={p.slug} className="bg-[#FAFAF8]">
                     <Link href={`/shop/${p.slug}`} className="group block">
                       <div className="aspect-[3/4] overflow-hidden bg-stone-100 relative">
+                        {p.tag && <span className="absolute top-3 left-3 z-10 text-[9px] tracking-[0.15em] uppercase px-2.5 py-1" style={p.tagStyle}>{p.tag}</span>}
                         <img src={p.img} alt={p.color} className="w-full h-full object-cover transition-all duration-500 group-hover:opacity-0" />
                         <img src={p.hover} alt={`${p.color} hover`} className="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                       </div>
@@ -151,6 +140,7 @@ export default function DropsPage() {
                   <div key={p.slug} className="bg-[#FAFAF8]">
                     <Link href={`/shop/${p.slug}`} className="group block">
                       <div className="aspect-[3/4] overflow-hidden bg-stone-100 relative">
+                        {p.tag && <span className="absolute top-3 left-3 z-10 text-[9px] tracking-[0.15em] uppercase px-2.5 py-1" style={p.tagStyle}>{p.tag}</span>}
                         <img src={p.img} alt={p.color} className="w-full h-full object-cover transition-all duration-500 group-hover:opacity-0" />
                         <img src={p.hover} alt={`${p.color} hover`} className="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                       </div>
