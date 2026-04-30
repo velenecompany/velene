@@ -29,6 +29,7 @@ export default function MembershipPage() {
         '5% de descuento en todas tus compras',
         'Notificaciones exclusivas de nuevas colecciones',
       ],
+      badgeStyle: { background: '#C9B99A', color: '#4a3d2a' },
     },
     {
       name: 'Drive',
@@ -41,6 +42,7 @@ export default function MembershipPage() {
         'Acceso a colorways limitados',
         'Envio gratis en todos tus pedidos',
       ],
+      badgeStyle: { background: '#8FA3B1', color: '#1a2530' },
     },
     {
       name: 'Apex',
@@ -55,6 +57,7 @@ export default function MembershipPage() {
         'Invitaciones a eventos privados de Velene',
         'Tu nombre en nuestra comunidad',
       ],
+      badgeStyle: { background: '#B8A87A', color: '#3d3017' },
       featured: true,
     },
   ];
@@ -87,7 +90,11 @@ export default function MembershipPage() {
             <div className="flex items-center justify-between mb-4">
               <p className="text-xs tracking-[0.2em] uppercase text-stone-500">Tu progreso</p>
               {tier ? (
-                <span className="text-[9px] tracking-[0.3em] uppercase bg-stone-900 text-white px-3 py-1">{tier}</span>
+                <span
+                  className="text-[9px] tracking-[0.3em] uppercase px-3 py-1"
+                  style={tiers.find(t => t.name === tier)?.badgeStyle || {background:'#0A0A0A', color:'#F5F2ED'}}>
+                  {tier}
+                </span>
               ) : (
                 <span className="text-[9px] tracking-[0.3em] uppercase text-stone-400">Sin tier aun</span>
               )}
@@ -100,8 +107,11 @@ export default function MembershipPage() {
               <div className="mt-4">
                 <div className="h-1 bg-stone-100 w-full">
                   <div
-                    className="h-1 bg-stone-900 transition-all"
-                    style={{ width: getProgress(tier === 'Pace' ? 5000 : tier === null ? 2500 : 7500) + '%' }}
+                    className="h-1 transition-all"
+                    style={{
+                      width: getProgress(tier === 'Pace' ? 5000 : tier === null ? 2500 : 7500) + '%',
+                      background: tier === 'Drive' ? '#8FA3B1' : tier === 'Pace' ? '#C9B99A' : '#B8A87A'
+                    }}
                   />
                 </div>
                 <p className="text-[10px] text-stone-400 mt-2">
@@ -121,8 +131,12 @@ export default function MembershipPage() {
         <section className="max-w-screen-xl mx-auto px-6 py-20">
           <div className="grid md:grid-cols-3 gap-px bg-stone-200">
             {tiers.map((t) => (
-              <div key={t.name} className={'p-10 ' + (t.featured ? 'bg-black text-white' : 'bg-white')}>
-                <p className={'text-[10px] tracking-[0.3em] uppercase mb-2 ' + (t.featured ? 'text-white/40' : 'text-stone-400')}>Velene</p>
+              <div key={t.name} className={'p-10 ' + (t.featured ? 'bg-[#0A0A0A] text-white' : 'bg-white')}>
+                <span
+                  className="inline-block text-[9px] tracking-[0.3em] uppercase px-3 py-1 mb-4"
+                  style={t.badgeStyle}>
+                  {t.name}
+                </span>
                 <h3 className="font-display text-4xl font-light mb-2">{t.name}</h3>
                 <p className={'text-sm mb-6 ' + (t.featured ? 'text-white/60' : 'text-stone-400')}>
                   A partir de ${t.threshold.toLocaleString('es-MX')} MXN acumulados
