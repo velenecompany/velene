@@ -17,7 +17,6 @@ export default function HomePage() {
               Luxury in<br />Defiance.
             </h1>
             <div className="flex gap-4">
-              
               <Link href="/drops" className="px-8 py-4 border border-white text-white text-xs tracking-[0.2em] uppercase hover:bg-white/10 transition-colors">Ver colección</Link>
             </div>
           </div>
@@ -30,7 +29,6 @@ export default function HomePage() {
                 <p className="text-[10px] tracking-[0.25em] uppercase text-stone-400 mb-2">Drop 001</p>
                 <p className="font-display text-4xl font-light">The Conclave</p>
               </div>
-              
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-stone-200">
               {[
@@ -79,6 +77,16 @@ export default function HomePage() {
             <Link href="/drops" className="inline-block px-10 py-4 border border-white text-xs tracking-[0.2em] uppercase hover:bg-white hover:text-black transition-colors">Ver The Conclave</Link>
           </div>
         </section>
+
+        <section className="py-24 bg-[#0A0A0A] text-white border-t border-white/10">
+          <div className="max-w-screen-xl mx-auto px-6 text-center">
+            <p className="text-[10px] tracking-[0.3em] uppercase text-white/40 mb-6">Distribución Autorizada</p>
+            <h2 className="font-display text-5xl md:text-7xl font-light mb-8">Conviértete en<br />Partner Autorizado.</h2>
+            <p className="text-sm text-white/50 mb-10 max-w-md mx-auto">Acceso anticipado a cada drop, precios de mayoreo y zona exclusiva. Seleccionamos a nuestros distribuidores con cuidado.</p>
+            <Link href="/partners" className="inline-block px-10 py-4 border border-white text-xs tracking-[0.2em] uppercase hover:bg-white hover:text-black transition-colors">Aplica Ahora</Link>
+          </div>
+        </section>
+
       </main>
       <Footer />
     </>
