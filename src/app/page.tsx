@@ -8,17 +8,21 @@ export default function HomePage() {
     <>
       <Navbar />
       <main>
-        <section className="relative flex items-end overflow-hidden" style={{minHeight:"70vh"}}>
+        <section className="relative flex items-center justify-center overflow-hidden" style={{minHeight:"100vh"}}>
           <HeroParallax />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/75" />
-          <div className="relative z-10 w-full max-w-screen-xl mx-auto px-6 pb-16">
-            <p className="text-[11px] tracking-[0.3em] uppercase text-white/60 mb-4">The Conclave · Drop 001</p>
-            <h1 className="font-display text-[clamp(48px,7vw,100px)] font-light text-white leading-none mb-8">
+          <div className="absolute inset-0 bg-black/40" />
+          <div className="relative z-10 text-center px-6">
+            <p className="text-[11px] tracking-[0.4em] uppercase text-white/60 mb-6">The Conclave · Drop 001</p>
+            <h1 className="font-display text-[clamp(64px,10vw,140px)] font-light text-white leading-none mb-10">
               Luxury in<br />Defiance.
             </h1>
-            <div className="flex gap-4">
-              <Link href="/drops" className="px-8 py-4 border border-white text-white text-xs tracking-[0.2em] uppercase hover:bg-white/10 transition-colors">Ver colección</Link>
-            </div>
+            <Link href="/drops" className="inline-block px-10 py-4 border border-white text-white text-xs tracking-[0.3em] uppercase hover:bg-white hover:text-black transition-colors">
+              Ver colección
+            </Link>
+          </div>
+          <div className="absolute bottom-8 left-0 right-0 flex justify-between px-8 z-10">
+            <p className="text-[10px] tracking-[0.3em] uppercase text-white/40">GDL — México</p>
+            <p className="text-[10px] tracking-[0.3em] uppercase text-white/40">Drop 001 — 2025</p>
           </div>
         </section>
 
