@@ -72,7 +72,7 @@ export default function DropsPage() {
   return (
     <>
       <Navbar />
-      <main className="pt-16 bg-[#FAFAF8] min-h-screen">
+      <main className="pt-16 bg-[#E8E2D9] min-h-screen">
         <section className="max-w-screen-xl mx-auto px-6 pt-24 pb-16">
           <p className="text-[10px] tracking-[0.3em] uppercase text-stone-400 mb-6">Colección activa</p>
           <h1 className="font-display text-7xl md:text-9xl font-light tracking-tight text-stone-900 leading-none mb-4">The Conclave</h1>
@@ -105,7 +105,7 @@ export default function DropsPage() {
               <p className="text-[10px] tracking-[0.25em] uppercase text-stone-400 mb-6">Sets</p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {SETS.map(p => (
-                  <div key={p.slug} className="bg-[#FAFAF8]">
+                  <div key={p.slug} className="bg-[#E8E2D9]">
                     <Link href={`/shop/${p.slug}`} className="group block">
                       <div className="aspect-[3/4] overflow-hidden bg-stone-100 relative">
                         {p.tag && <span className="absolute top-3 left-3 z-10 text-[9px] tracking-[0.15em] uppercase px-2.5 py-1" style={p.tagStyle}>{p.tag}</span>}
@@ -137,7 +137,7 @@ export default function DropsPage() {
               <p className="text-[10px] tracking-[0.25em] uppercase text-stone-400 mb-6">T-Shirts</p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {TSHIRTS.map(p => (
-                  <div key={p.slug} className="bg-[#FAFAF8]">
+                  <div key={p.slug} className="bg-[#E8E2D9]">
                     <Link href={`/shop/${p.slug}`} className="group block">
                       <div className="aspect-[3/4] overflow-hidden bg-stone-100 relative">
                         {p.tag && <span className="absolute top-3 left-3 z-10 text-[9px] tracking-[0.15em] uppercase px-2.5 py-1" style={p.tagStyle}>{p.tag}</span>}
