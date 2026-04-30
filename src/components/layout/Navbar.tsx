@@ -16,7 +16,6 @@ export default function Navbar() {
     window.addEventListener('scroll', onScroll);
     window.addEventListener('cart-updated', onCart);
 
-    // Verificar si el usuario tiene acceso anticipado
     const token = localStorage.getItem('token');
     if (token) {
       Promise.all([
@@ -44,7 +43,7 @@ export default function Navbar() {
           <Link href="/drops" className="text-[11px] tracking-[0.15em] uppercase text-stone-500 hover:text-stone-900 transition-colors">Drops</Link>
           {earlyAccess && (
             <Link href="/early-access" className="text-[11px] tracking-[0.15em] uppercase text-stone-900 hover:text-stone-600 transition-colors flex items-center gap-1.5">
-              <span>Early Access</span>
+              <span>The Shalom</span>
               <span className="text-[9px]">✦</span>
             </Link>
           )}
@@ -96,7 +95,7 @@ export default function Navbar() {
             <Link href="/early-access"
               className="block text-sm tracking-[0.15em] uppercase py-3 border-b border-[#E2DDD8] text-stone-900"
               onClick={() => setMenuOpen(false)}>
-              Early Access ✦
+              The Shalom ✦
             </Link>
           )}
         </div>
