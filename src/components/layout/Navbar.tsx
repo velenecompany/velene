@@ -45,6 +45,7 @@ export default function Navbar() {
       <nav className="max-w-screen-xl mx-auto px-6 h-16 flex items-center justify-between">
         <div className="hidden md:flex items-center gap-8">
           <Link href="/drops" className={`text-[11px] tracking-[0.15em] uppercase transition-colors hover:opacity-70 ${textColor}`}>Drops</Link>
+          <Link href="/membership" className={`text-[11px] tracking-[0.15em] uppercase transition-colors hover:opacity-70 ${textColor}`}>Membership</Link>
           {earlyAccess && (
             <Link href="/early-access" className={`text-[11px] tracking-[0.15em] uppercase transition-colors flex items-center gap-1.5 hover:opacity-70 ${textColorDark}`}>
               <span>The Shalom</span>
@@ -88,7 +89,7 @@ export default function Navbar() {
       </nav>
       {menuOpen && (
         <div className="md:hidden bg-[#FAFAF8] border-t border-[#E2DDD8] px-6 py-8">
-          {['Drops', 'About', 'Account', 'Cart'].map(item => (
+          {['Drops', 'Membership', 'About', 'Account', 'Cart'].map(item => (
             <Link key={item} href={`/${item.toLowerCase()}`}
               className="block text-sm tracking-[0.15em] uppercase py-3 border-b border-[#E2DDD8] last:border-0 text-stone-900"
               onClick={() => setMenuOpen(false)}>
