@@ -32,20 +32,23 @@ function precioConDescuento(precio: number, discount: number): string {
 export default function DropsPage() {
   const [drop, setDrop] = useState<any>(null);
   const [tier, setTier] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    if (token) {
-      fetch('/api/auth/me', { headers: { Authorization: `Bearer ${token}` } })
-        .then(r => r.json())
-        .then(data => { if (data.membership_tier) setTier(data.membership_tier); })
-        .catch(() => {});
-    }
-    fetch('/api/drops?slug=the-conclave')
+    const authFetch = token
+      ? fetch('/api/auth/me', { headers: { Authorization: `Bearer ${token}` } })
+          .then(r => r.json())
+          .then(data => { if (data.membership_tier) setTier(data.membership_tier); })
+          .catch(() => {})
+      : Promise.resolve();
+
+    const dropFetch = fetch('/api/drops?slug=the-conclave')
       .then(r => r.json())
-      .then(data => { setDrop(data); setLoading(false); })
-      .catch(() => setLoading(false));
+      .then(data => setDrop(data))
+      .catch(() => {});
+
+    Promise.all([authFetch, dropFetch]).finally(() => setLoading(false));
   }, []);
 
   function tieneAcceso(): boolean {
@@ -77,14 +80,30 @@ export default function DropsPage() {
           <p className="text-[10px] tracking-[0.3em] uppercase text-stone-400 mb-6">Colección activa</p>
           <h1 className="font-display text-7xl md:text-9xl font-light tracking-tight text-stone-900 leading-none mb-4">The Conclave</h1>
           <p className="text-[11px] tracking-[0.2em] uppercase text-stone-400 mt-6">GDL — 2025 — Edición limitada</p>
-          {mensajeEarly && (
+          {!loading && mensajeEarly && (
             <div className="mt-8 inline-block border border-stone-900 px-6 py-3">
               <p className="text-[11px] tracking-[0.2em] uppercase text-stone-900">✦ {mensajeEarly}</p>
             </div>
           )}
         </section>
 
-        {!acceso ? (
+        {loading ? (
+          <section className="max-w-screen-xl mx-auto px-6 pb-32">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {[1, 2, 3].map(i => (
+                <div key={i} className="bg-[#E8E2D9] animate-pulse">
+                  <div className="aspect-[3/4] bg-stone-200" />
+                  <div className="p-6 space-y-3">
+                    <div className="h-2 bg-stone-200 rounded w-1/2" />
+                    <div className="h-4 bg-stone-200 rounded w-2/3" />
+                    <div className="h-2 bg-stone-200 rounded w-full" />
+                    <div className="h-4 bg-stone-200 rounded w-1/3" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        ) : !acceso ? (
           <section className="max-w-screen-xl mx-auto px-6 pb-32 text-center">
             <div className="border border-stone-200 py-24 px-6">
               <p className="text-[10px] tracking-[0.4em] uppercase text-stone-400 mb-6">Acceso Restringido</p>
