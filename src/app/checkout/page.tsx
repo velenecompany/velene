@@ -20,6 +20,10 @@ function Field({ label, placeholder, type = 'text', value, onChange }: {
   );
 }
 
+declare global {
+  interface Window { fbq: (...args: any[]) => void; }
+}
+
 function CheckoutContent() {
   const searchParams = useSearchParams();
   const success = searchParams.get('success');
@@ -39,8 +43,27 @@ function CheckoutContent() {
   const [membershipTier, setMembershipTier] = useState<string | null>(null);
 
   useEffect(() => {
-    setItems(getCart());
-    if (success) limpiar();
+    const cartItems = getCart();
+    setItems(cartItems);
+
+    if (success) {
+      // Disparar evento Purchase al Meta Pixel
+      const total = cartItems.reduce((a, i) => a + i.precio * i.cantidad, 0);
+      if (typeof window !== 'undefined' && window.fbq) {
+        window.fbq('track', 'Purchase', {
+          value: total,
+          currency: 'MXN',
+          contents: cartItems.map(i => ({
+            id: i.slug,
+            quantity: i.cantidad,
+            item_price: i.precio,
+          })),
+          content_type: 'product',
+        });
+      }
+      limpiar();
+    }
+
     fetch('/api/auth/me')
       .then(r => r.json())
       .then(d => {
@@ -101,7 +124,7 @@ function CheckoutContent() {
           <div className="text-center px-6">
             <div className="w-16 h-16 border border-black rounded-full flex items-center justify-center mx-auto mb-8 text-2xl">✓</div>
             <h1 className="font-display text-5xl font-light mb-4">Pedido confirmado</h1>
-            <p className="text-sm text-stone-500 max-w-sm mx-auto mb-8">Gracias por tu compra.</p>
+            <p className="text-sm text-stone-500 max-w-sm mx-auto mb-8">Gracias por tu compra. Te llegará un correo con los detalles.</p>
             <Link href="/" className="text-[11px] tracking-[0.2em] uppercase border-b border-stone-900 pb-px">Continuar comprando</Link>
           </div>
         </main>
