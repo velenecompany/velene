@@ -3,6 +3,50 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { cartCount } from '@/store/cart';
 
+function HotSaleBanner() {
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const end = new Date('2026-06-07T23:59:00-06:00').getTime();
+    const now = Date.now();
+    if (now >= end) return;
+    setVisible(true);
+
+    const tick = () => {
+      const diff = end - Date.now();
+      if (diff <= 0) { setVisible(false); return; }
+      setTimeLeft({
+        days: Math.floor(diff / 86400000),
+        hours: Math.floor((diff % 86400000) / 3600000),
+        minutes: Math.floor((diff % 3600000) / 60000),
+        seconds: Math.floor((diff % 60000) / 1000),
+      });
+    };
+    tick();
+    const interval = setInterval(tick, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  if (!visible) return null;
+
+  return (
+    <div className="w-full bg-[#B8A87A] text-[#0A0A0A] py-2 px-4 flex items-center justify-center gap-6 z-50">
+      <p className="text-[10px] tracking-[0.3em] uppercase font-medium">Hot Sale — Hasta 33% off</p>
+      <div className="flex items-center gap-3 text-[10px] tracking-[0.2em] uppercase">
+        <span>{String(timeLeft.days).padStart(2,'0')}d</span>
+        <span className="opacity-40">·</span>
+        <span>{String(timeLeft.hours).padStart(2,'0')}h</span>
+        <span className="opacity-40">·</span>
+        <span>{String(timeLeft.minutes).padStart(2,'0')}m</span>
+        <span className="opacity-40">·</span>
+        <span>{String(timeLeft.seconds).padStart(2,'0')}s</span>
+      </div>
+      <Link href="/drops" className="text-[9px] tracking-[0.25em] uppercase border-b border-[#0A0A0A]/40 pb-px hover:border-[#0A0A0A] transition-colors">Ver ofertas</Link>
+    </div>
+  );
+}
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -41,70 +85,73 @@ export default function Navbar() {
   const logoColor = scrolled ? 'text-stone-900' : 'text-white';
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-[#FAFAF8]/95 backdrop-blur-sm border-b border-[#E2DDD8]' : 'bg-transparent'}`}>
-      <nav className="max-w-screen-xl mx-auto px-6 h-16 flex items-center justify-between">
-        <div className="hidden md:flex items-center gap-8">
-          <Link href="/drops" className={`text-[11px] tracking-[0.15em] uppercase transition-colors hover:opacity-70 ${textColor}`}>Drops</Link>
-          <Link href="/membership" className={`text-[11px] tracking-[0.15em] uppercase transition-colors hover:opacity-70 ${textColor}`}>Membership</Link>
-          {earlyAccess && (
-            <Link href="/early-access" className={`text-[11px] tracking-[0.15em] uppercase transition-colors flex items-center gap-1.5 hover:opacity-70 ${textColorDark}`}>
-              <span>The Shalom</span>
-              <span className="text-[9px]">✦</span>
-            </Link>
-          )}
-        </div>
-        <Link href="/" className={`font-display text-2xl font-light tracking-[0.2em] uppercase absolute left-1/2 -translate-x-1/2 transition-colors ${logoColor}`}>VELENÉ</Link>
-        <div className="hidden md:flex items-center gap-6">
-          <Link href="/about" className={`text-[11px] tracking-[0.15em] uppercase transition-colors hover:opacity-70 ${textColor}`}>About</Link>
-          <div className="relative group">
-            <button className={`text-[11px] tracking-[0.15em] uppercase transition-colors hover:opacity-70 ${textColor}`}>Account</button>
-            <div className="absolute right-0 top-full pt-2 opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-200 z-50">
-              <div className="bg-white border border-stone-100 shadow-lg w-72 p-6">
-                <p className="text-xs text-stone-400 mb-1">Hi, nice to see you.</p>
-                <p className="font-display text-lg font-light mb-5">Your Account</p>
-                <div className="space-y-3">
-                  <Link href="/account" className="block text-[11px] tracking-[0.15em] uppercase text-stone-600 hover:text-stone-900">Dashboard</Link>
-                  <Link href="/account" className="block text-[11px] tracking-[0.15em] uppercase text-stone-600 hover:text-stone-900">Mis Pedidos</Link>
-                  <Link href="/account" className="block text-[11px] tracking-[0.15em] uppercase text-stone-600 hover:text-stone-900">Mi Perfil</Link>
-                  <Link href="/membership" className="block text-[11px] tracking-[0.15em] uppercase text-stone-600 hover:text-stone-900">Membresía</Link>
-                </div>
-                <div className="border-t border-stone-100 mt-5 pt-4">
-                  <Link href="/login" className="block text-[11px] tracking-[0.15em] uppercase text-stone-400 hover:text-stone-900">Cerrar sesión</Link>
+    <>
+      <HotSaleBanner />
+      <header className={`fixed left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-[#FAFAF8]/95 backdrop-blur-sm border-b border-[#E2DDD8]' : 'bg-transparent'}`} style={{top: 0}}>
+        <nav className="max-w-screen-xl mx-auto px-6 h-16 flex items-center justify-between">
+          <div className="hidden md:flex items-center gap-8">
+            <Link href="/drops" className={`text-[11px] tracking-[0.15em] uppercase transition-colors hover:opacity-70 ${textColor}`}>Drops</Link>
+            <Link href="/membership" className={`text-[11px] tracking-[0.15em] uppercase transition-colors hover:opacity-70 ${textColor}`}>Membership</Link>
+            {earlyAccess && (
+              <Link href="/early-access" className={`text-[11px] tracking-[0.15em] uppercase transition-colors flex items-center gap-1.5 hover:opacity-70 ${textColorDark}`}>
+                <span>The Shalom</span>
+                <span className="text-[9px]">✦</span>
+              </Link>
+            )}
+          </div>
+          <Link href="/" className={`font-display text-2xl font-light tracking-[0.2em] uppercase absolute left-1/2 -translate-x-1/2 transition-colors ${logoColor}`}>VELENÉ</Link>
+          <div className="hidden md:flex items-center gap-6">
+            <Link href="/about" className={`text-[11px] tracking-[0.15em] uppercase transition-colors hover:opacity-70 ${textColor}`}>About</Link>
+            <div className="relative group">
+              <button className={`text-[11px] tracking-[0.15em] uppercase transition-colors hover:opacity-70 ${textColor}`}>Account</button>
+              <div className="absolute right-0 top-full pt-2 opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-200 z-50">
+                <div className="bg-white border border-stone-100 shadow-lg w-72 p-6">
+                  <p className="text-xs text-stone-400 mb-1">Hi, nice to see you.</p>
+                  <p className="font-display text-lg font-light mb-5">Your Account</p>
+                  <div className="space-y-3">
+                    <Link href="/account" className="block text-[11px] tracking-[0.15em] uppercase text-stone-600 hover:text-stone-900">Dashboard</Link>
+                    <Link href="/account" className="block text-[11px] tracking-[0.15em] uppercase text-stone-600 hover:text-stone-900">Mis Pedidos</Link>
+                    <Link href="/account" className="block text-[11px] tracking-[0.15em] uppercase text-stone-600 hover:text-stone-900">Mi Perfil</Link>
+                    <Link href="/membership" className="block text-[11px] tracking-[0.15em] uppercase text-stone-600 hover:text-stone-900">Membresía</Link>
+                  </div>
+                  <div className="border-t border-stone-100 mt-5 pt-4">
+                    <Link href="/login" className="block text-[11px] tracking-[0.15em] uppercase text-stone-400 hover:text-stone-900">Cerrar sesión</Link>
+                  </div>
                 </div>
               </div>
             </div>
+            <Link href="/cart" className={`text-[11px] tracking-[0.15em] uppercase transition-colors hover:opacity-70 ${scrolled ? 'text-stone-900 border-b border-stone-900' : 'text-white border-b border-white'} pb-px`}>
+              {count > 0 ? `Cart (${count})` : 'Cart'}
+            </Link>
           </div>
-          <Link href="/cart" className={`text-[11px] tracking-[0.15em] uppercase transition-colors hover:opacity-70 ${scrolled ? 'text-stone-900 border-b border-stone-900' : 'text-white border-b border-white'} pb-px`}>
-            {count > 0 ? `Cart (${count})` : 'Cart'}
+          <button className="md:hidden ml-auto mr-4" onClick={() => setMenuOpen(!menuOpen)}>
+            <div className={`w-5 h-px transition-all mb-1.5 ${scrolled ? 'bg-stone-900' : 'bg-white'} ${menuOpen ? 'rotate-45 translate-y-2' : ''}`} />
+            <div className={`w-5 h-px transition-all mb-1.5 ${scrolled ? 'bg-stone-900' : 'bg-white'} ${menuOpen ? 'opacity-0' : ''}`} />
+            <div className={`w-5 h-px transition-all ${scrolled ? 'bg-stone-900' : 'bg-white'} ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
+          </button>
+          <Link href="/cart" className={`md:hidden text-[11px] tracking-[0.15em] uppercase transition-colors ${scrolled ? 'text-stone-900' : 'text-white'}`}>
+            {count > 0 ? `(${count})` : 'Cart'}
           </Link>
-        </div>
-        <button className="md:hidden ml-auto mr-4" onClick={() => setMenuOpen(!menuOpen)}>
-          <div className={`w-5 h-px transition-all mb-1.5 ${scrolled ? 'bg-stone-900' : 'bg-white'} ${menuOpen ? 'rotate-45 translate-y-2' : ''}`} />
-          <div className={`w-5 h-px transition-all mb-1.5 ${scrolled ? 'bg-stone-900' : 'bg-white'} ${menuOpen ? 'opacity-0' : ''}`} />
-          <div className={`w-5 h-px transition-all ${scrolled ? 'bg-stone-900' : 'bg-white'} ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
-        </button>
-        <Link href="/cart" className={`md:hidden text-[11px] tracking-[0.15em] uppercase transition-colors ${scrolled ? 'text-stone-900' : 'text-white'}`}>
-          {count > 0 ? `(${count})` : 'Cart'}
-        </Link>
-      </nav>
-      {menuOpen && (
-        <div className="md:hidden bg-[#FAFAF8] border-t border-[#E2DDD8] px-6 py-8">
-          {['Drops', 'Membership', 'About', 'Account', 'Cart'].map(item => (
-            <Link key={item} href={`/${item.toLowerCase()}`}
-              className="block text-sm tracking-[0.15em] uppercase py-3 border-b border-[#E2DDD8] last:border-0 text-stone-900"
-              onClick={() => setMenuOpen(false)}>
-              {item}{item === 'Cart' && count > 0 ? ` (${count})` : ''}
-            </Link>
-          ))}
-          {earlyAccess && (
-            <Link href="/early-access"
-              className="block text-sm tracking-[0.15em] uppercase py-3 border-b border-[#E2DDD8] text-stone-900"
-              onClick={() => setMenuOpen(false)}>
-              The Shalom ✦
-            </Link>
-          )}
-        </div>
-      )}
-    </header>
+        </nav>
+        {menuOpen && (
+          <div className="md:hidden bg-[#FAFAF8] border-t border-[#E2DDD8] px-6 py-8">
+            {['Drops', 'Membership', 'About', 'Account', 'Cart'].map(item => (
+              <Link key={item} href={`/${item.toLowerCase()}`}
+                className="block text-sm tracking-[0.15em] uppercase py-3 border-b border-[#E2DDD8] last:border-0 text-stone-900"
+                onClick={() => setMenuOpen(false)}>
+                {item}{item === 'Cart' && count > 0 ? ` (${count})` : ''}
+              </Link>
+            ))}
+            {earlyAccess && (
+              <Link href="/early-access"
+                className="block text-sm tracking-[0.15em] uppercase py-3 border-b border-[#E2DDD8] text-stone-900"
+                onClick={() => setMenuOpen(false)}>
+                The Shalom ✦
+              </Link>
+            )}
+          </div>
+        )}
+      </header>
+    </>
   );
 }
