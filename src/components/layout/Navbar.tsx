@@ -3,19 +3,22 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { cartCount } from '@/store/cart';
 
-function HotSaleBanner() {
+const BANNER_HEIGHT = 36;
+
+function HotSaleBanner({ onVisible }: { onVisible: (v: boolean) => void }) {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const end = new Date('2026-06-07T23:59:00-06:00').getTime();
     const now = Date.now();
-    if (now >= end) return;
+    if (now >= end) { onVisible(false); return; }
     setVisible(true);
+    onVisible(true);
 
     const tick = () => {
       const diff = end - Date.now();
-      if (diff <= 0) { setVisible(false); return; }
+      if (diff <= 0) { setVisible(false); onVisible(false); return; }
       setTimeLeft({
         days: Math.floor(diff / 86400000),
         hours: Math.floor((diff % 86400000) / 3600000),
@@ -31,8 +34,11 @@ function HotSaleBanner() {
   if (!visible) return null;
 
   return (
-    <div className="w-full bg-[#B8A87A] text-[#0A0A0A] py-2 px-4 flex items-center justify-center gap-6 z-50">
-      <p className="text-[10px] tracking-[0.3em] uppercase font-medium">Hot Sale — Hasta 33% off</p>
+    <div
+      className="fixed top-0 left-0 right-0 w-full bg-[#B8A87A] text-[#0A0A0A] px-4 flex items-center justify-center gap-6 z-50"
+      style={{ height: BANNER_HEIGHT }}
+    >
+      <p className="text-[10px] tracking-[0.3em] uppercase font-medium hidden sm:block">Hot Sale — Hasta 33% off</p>
       <div className="flex items-center gap-3 text-[10px] tracking-[0.2em] uppercase">
         <span>{String(timeLeft.days).padStart(2,'0')}d</span>
         <span className="opacity-40">·</span>
@@ -52,6 +58,7 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [count, setCount] = useState(0);
   const [earlyAccess, setEarlyAccess] = useState(false);
+  const [bannerVisible, setBannerVisible] = useState(false);
 
   useEffect(() => {
     setCount(cartCount());
@@ -83,11 +90,15 @@ export default function Navbar() {
   const textColor = scrolled ? 'text-stone-500' : 'text-white';
   const textColorDark = scrolled ? 'text-stone-900' : 'text-white';
   const logoColor = scrolled ? 'text-stone-900' : 'text-white';
+  const navTop = bannerVisible ? BANNER_HEIGHT : 0;
 
   return (
     <>
-      <HotSaleBanner />
-      <header className={`fixed left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-[#FAFAF8]/95 backdrop-blur-sm border-b border-[#E2DDD8]' : 'bg-transparent'}`} style={{top: 0}}>
+      <HotSaleBanner onVisible={setBannerVisible} />
+      <header
+        className={`fixed left-0 right-0 z-40 transition-all duration-300 ${scrolled ? 'bg-[#FAFAF8]/95 backdrop-blur-sm border-b border-[#E2DDD8]' : 'bg-transparent'}`}
+        style={{ top: navTop }}
+      >
         <nav className="max-w-screen-xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="hidden md:flex items-center gap-8">
             <Link href="/drops" className={`text-[11px] tracking-[0.15em] uppercase transition-colors hover:opacity-70 ${textColor}`}>Drops</Link>
