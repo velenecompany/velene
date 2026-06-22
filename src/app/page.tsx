@@ -6,6 +6,7 @@ import HeroParallax from '@/components/home/HeroParallax';
 import Link from 'next/link';
 
 const HOT_SALE_END = new Date('2026-06-07T23:59:00-06:00').getTime();
+const SHALOM_DATE = new Date('2026-08-28T00:00:00-06:00').getTime();
 const DESCUENTO = 0.20;
 
 function precioHotSale(precio: number) {
@@ -51,11 +52,7 @@ function Carrusel() {
               >
                 <span className="absolute top-3 left-3 z-10 text-[9px] tracking-[0.15em] uppercase px-2.5 py-1 bg-[#B8A87A] text-[#0A0A0A]">−20%</span>
                 <span className="absolute top-3 right-3 z-10 text-[9px] tracking-[0.15em] uppercase px-2.5 py-1 bg-[#0A0A0A] text-[#F5F2ED]">Hot Sale</span>
-                <img
-                  src={hoveredIdx === i ? p.hover : p.img}
-                  alt={p.nombre}
-                  className="w-full h-full object-cover transition-all duration-500"
-                />
+                <img src={hoveredIdx === i ? p.hover : p.img} alt={p.nombre} className="w-full h-full object-cover transition-all duration-500" />
               </div>
             </Link>
             <div className="p-5">
@@ -71,27 +68,76 @@ function Carrusel() {
       </div>
       <div className="flex items-center justify-center gap-6 mt-8">
         <button onClick={prev} className="w-10 h-10 border border-stone-300 flex items-center justify-center hover:border-stone-900 transition-colors">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-            <path d="M15 18l-6-6 6-6"/>
-          </svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M15 18l-6-6 6-6"/></svg>
         </button>
         <p className="text-[10px] tracking-[0.3em] uppercase text-stone-400">{current + 1} — {total}</p>
         <button onClick={next} className="w-10 h-10 border border-stone-300 flex items-center justify-center hover:border-stone-900 transition-colors">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-            <path d="M9 18l6-6-6-6"/>
-          </svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M9 18l6-6-6-6"/></svg>
         </button>
       </div>
     </div>
   );
 }
 
+function ShalomCountdown() {
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+
+  useEffect(() => {
+    const tick = () => {
+      const diff = SHALOM_DATE - Date.now();
+      if (diff <= 0) return;
+      setTimeLeft({
+        days: Math.floor(diff / 86400000),
+        hours: Math.floor((diff % 86400000) / 3600000),
+        minutes: Math.floor((diff % 3600000) / 60000),
+        seconds: Math.floor((diff % 60000) / 1000),
+      });
+    };
+    tick();
+    const interval = setInterval(tick, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="flex items-end gap-6">
+      {[
+        { val: timeLeft.days, label: 'días' },
+        { val: timeLeft.hours, label: 'hrs' },
+        { val: timeLeft.minutes, label: 'min' },
+        { val: timeLeft.seconds, label: 'seg' },
+      ].map(({ val, label }) => (
+        <div key={label} className="text-center">
+          <p className="font-display text-5xl md:text-6xl font-light text-white leading-none">{String(val).padStart(2, '0')}</p>
+          <p className="text-[9px] tracking-[0.25em] uppercase text-white/30 mt-2">{label}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export default function HomePage() {
   const [hotSaleActive, setHotSaleActive] = useState(false);
+  const [phone, setPhone] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+  const [loadingPhone, setLoadingPhone] = useState(false);
 
   useEffect(() => {
     setHotSaleActive(Date.now() < HOT_SALE_END);
   }, []);
+
+  async function handleShalom() {
+    if (!phone.trim() || phone.length < 10) return;
+    setLoadingPhone(true);
+    try {
+      await fetch('/api/shalom-waitlist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone: phone.trim() }),
+      });
+      setSubmitted(true);
+    } catch {}
+    setLoadingPhone(false);
+  }
 
   return (
     <>
@@ -116,6 +162,24 @@ export default function HomePage() {
           <div className="absolute bottom-8 left-0 right-0 flex justify-between px-8 z-10">
             <p className="text-[10px] tracking-[0.3em] uppercase text-white/40">GDL — México</p>
             <p className="text-[10px] tracking-[0.3em] uppercase text-white/40">Drop 001 — 2025</p>
+          </div>
+        </section>
+
+        {/* The Shalom — Drop 002 */}
+        <section className="relative py-32 bg-[#0A0A0A] overflow-hidden">
+          <div className="absolute inset-0">
+            <img src="/shalom-bg.jpg" alt="The Shalom" className="w-full h-full object-cover object-center opacity-30" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/80 to-transparent" />
+          </div>
+          <div className="relative z-10 max-w-screen-xl mx-auto px-6">
+            <div className="max-w-lg">
+              <p className="text-[10px] tracking-[0.5em] uppercase text-[#B8A87A] mb-4">Drop 002</p>
+              <h2 className="font-display text-6xl md:text-8xl font-light text-white leading-none mb-6">The Shalom</h2>
+              <p className="text-[11px] tracking-[0.3em] uppercase text-white/40 mb-12">GDL — 28 ago 2026 — Edición limitada</p>
+              <Link href="/the-shalom" className="inline-block px-10 py-4 border border-white text-white text-sm tracking-[0.3em] uppercase hover:bg-white hover:text-black transition-colors">
+                Ver colección
+              </Link>
+            </div>
           </div>
         </section>
 
@@ -157,8 +221,6 @@ export default function HomePage() {
               )}
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-
-              {/* Set Rosa */}
               <Link href="/shop/set-conclave-rosa" className="group bg-white block relative">
                 <div className="aspect-[3/4] overflow-hidden relative">
                   <span className="absolute top-3 left-3 z-10 bg-black text-white text-[9px] tracking-[0.15em] uppercase px-2.5 py-1">Nuevo</span>
@@ -175,8 +237,6 @@ export default function HomePage() {
                   <p className="text-[10px] text-emerald-600 mt-1">✓ Envío gratis</p>
                 </div>
               </Link>
-
-              {/* Set Beige */}
               <Link href="/shop/set-conclave-beige" className="group bg-white block relative">
                 <div className="aspect-[3/4] overflow-hidden relative">
                   <span className="absolute top-3 left-3 z-10 bg-black text-white text-[9px] tracking-[0.15em] uppercase px-2.5 py-1">Nuevo</span>
@@ -193,8 +253,6 @@ export default function HomePage() {
                   <p className="text-[10px] text-emerald-600 mt-1">✓ Envío gratis</p>
                 </div>
               </Link>
-
-              {/* Set Azul */}
               <Link href="/shop/set-conclave-azul" className="group bg-white block relative">
                 <div className="aspect-[3/4] overflow-hidden relative">
                   <span className="absolute top-3 left-3 z-10 text-[9px] tracking-[0.15em] uppercase px-2.5 py-1" style={{background:'#8FA3B1', color:'#1a2530'}}>Oferta</span>
@@ -212,7 +270,6 @@ export default function HomePage() {
                   <p className="text-[10px] text-emerald-600 mt-1">✓ Envío gratis</p>
                 </div>
               </Link>
-
             </div>
           </div>
         </section>
