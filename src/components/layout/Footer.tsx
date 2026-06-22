@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 function Countdown() {
-  const target = new Date('2026-07-12T00:00:00');
+  const target = new Date('2026-08-28T00:00:00');
   const [time, setTime] = useState({ d: 0, h: 0, m: 0, s: 0 });
 
   useEffect(() => {
